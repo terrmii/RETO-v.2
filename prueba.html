@@ -9,9 +9,9 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
 </head>
 
 <body>
@@ -38,6 +38,9 @@
                 <div id="map"></div>
             </div>
         </div>
+        <!-- Js Leaftlet -->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <!-- Js leaftlet pers -->
         <script src="js/mapa.js"></script>
       </div>
       <!-- Ubicaciones -->
@@ -55,11 +58,85 @@
     <div class="container">
       <img src="img/suncloud-high-resolution-logo-white-transparent.png" alt="logo-navbar">
       <div class="ms-auto d-grid gap-2 d-lg-block">
-        <a class="btn link-secondary" href="#">Sign in</a>
-        <a class="btn btn-secondary" href="#">Sign up</a>
+        <button type="button" class="btn link-secondary text-white" data-bs-toggle="modal" data-bs-target="#inicioSesionModal">
+          Sign in
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#registroModal">
+          Sign up
+        </button>
       </div>
     </div>
   </div>
+  <!-- Modal Register -->
+  <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registroModalLabel">Registrese</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="CorreoElectronico">Correo electronico</label>
+              <input type="email" class="form-control" id="correoElectronico" placeholder="Correo electronico">
+
+            </div>
+            <div class="form-group">
+              <label for="Contraseña">Contraseña</label>
+              <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña">
+            </div>
+            <div class="form-group">
+              <label for="ConfirmarContraseña">Confirmar Contraseña</label>
+              <input type="password" class="form-control" id="ConfirmarContraseña" placeholder="Contraseña">
+              <small id="contraseñaAyuda" class="form-text text-muted">¿Ya tiene cuenta?<a style="cursor: pointer;" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#inicioSesionModal">
+              <u>Inicie sesión aqui</u>
+              </a></small>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Registrarse</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+    <!-- Modal Log In -->
+    <div class="modal fade" id="inicioSesionModal" tabindex="-1" aria-labelledby="inicioSesionModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="inicioSesionModalLabel">Inicie sesion</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="CorreoElectronico">Correo electronico</label>
+                <input type="email" class="form-control" id="correoElectronico" placeholder="Correo electronico">
+  
+              </div>
+              <div class="form-group">
+                <label for="Contraseña">Contraseña</label>
+                <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña">
+                <small id="olvidoAyuda" class="form-text text-muted"><u>¿Ha olvidado la contraseña?</u></small>
+              </div>
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Registrarse</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  <!-- BS5 js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
