@@ -6,5 +6,8 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Crear un marcador con una etiqueta pop-up
 var marker = L.marker([43.3224, -1.9850]).addTo(map);
-marker.bindPopup("<b>Mi Marcador</b><br>Esta es una etiqueta pop-up.");
+marker.bindTooltip("<b>Mi Marcador</b><br>Esta es una etiqueta pop-up.",{
+    direction : 'top',
+    offset: L.point(-15, -20)
+});
 
