@@ -20,29 +20,7 @@
     <div class="swiper-wrapper">
       <!-- Inicio -->
       <div class="swiper-slide">
-        <div class="inicio">
-          <img src="img/suncloud-high-resolution-logo-white-transparent.png" alt="Logo-grande" class="logo-inicio">
-          <h2>Planifica tu día con certeza. <br>Consulta nuestro pronóstico del tiempo en un solo click <br>¡Descúbrelo ahora!</h2>
-          <a href="#/mapa"><i class="fa-regular fa-circle-down fa-2xl"></i></a>
-        </div>
-        <div id="contenido">
-          <!-- Contenido de las diferentes vistas se cargará aquí -->
-        </div>
-      </div>
-      <!-- Mapa -->
-      <div class="swiper-slide">
-        <div class="mapa">
-            <div class="container">
-                <h1 class="text-center text-white">Seleccione una baliza para visualizar el tiempo.</h1>
-    
-                <div id="map"></div>
-            </div>
-        </div>
-        <!-- Js Leaftlet -->
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-        <!-- Js leaftlet pers -->
-        <script src="js/mapa.js"></script>
-      </div>
+
       <!-- Ubicaciones -->
       <div class="swiper-slide">
         <div class="swiper mySwiper2 swiper-v">
@@ -51,7 +29,10 @@
               <div class="container">
 
                 <h2>San Sebastián</h2>
-                <i class="fa-regular fa-sun"></i>
+                <div class="temperatura">
+                  <div class="iconoTiempo"></div>
+                  <span>33º</span>
+                </div>
 
                 <!-- Grafico -->
                 <div>
@@ -81,11 +62,14 @@
                       }
                     }
                   });
+                  Chart.defaults.color = 'white';
+                  
                 </script>                
               </div>
 
 
             </div>
+            <!-- ----------------------------- -->
             <div class="swiper-slide">Vertical Slide 2</div>
             <div class="swiper-slide">Vertical Slide 3</div>
             <div class="swiper-slide">Vertical Slide 4</div>

@@ -30,31 +30,6 @@ body{
     max-width: 100%;
   }
 
-/* Cambio de los iconos nube */
-.swiper-pagination-bullet {
-    width: 20px;
-    height: 20px;
-    background-color: #007BFF;
-    border-radius: 50%;
-    margin: 0 5px;
-    cursor: pointer;
-    position: relative;
-  }
-  
-.swiper-pagination-bullet::before {
-    content: '\2601'; /* Código Unicode para una nube */
-    font-size: 1em; /* Tamaño del icono */
-    color: #fff; /* Color del icono */
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-.swiper-pagination-bullet-active::before {
-    content: '\2600'; /* Código Unicode para un sol */
-    color: #ffcc00; /* Color del sol */
-  }
-
 /* Estilos Inicio */
 .inicio{
     text-align: center;
@@ -111,5 +86,37 @@ body{
     height: 500px;
     
  }
+
+/* Ubicaciones */
+
+.container h2{
+  font-family: 'Work Sans', sans-serif;
+  color: white;
+}
+
+canvas{
+  width: 50% !important;
+  height: 50% !important;
+}
+
+.temperatura{
+  float: right;
+}
+
+.temperatura span{
+  font-size: 40px;
+  font-weight: bolder;
+}
+
+.iconoTiempo{
+  width: 62px;
+  height: 70px;
+  background-image: url(../img/iconos-removebg-preview.png);
+  background-repeat: no-repeat;
+  background-position-x: -170px;
+  background-position-y: -225px;
+}
+
+
 
 

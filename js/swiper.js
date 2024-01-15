@@ -32,6 +32,14 @@ document.addEventListener("DOMContentLoaded", function () {
         },
       },
     });
+    var swiper2 = new Swiper(".mySwiper2", {
+      direction: "horizontal",
+      spaceBetween: 50,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
           // Agregar transición a la propiedad opacity
           navbar.style.transition = "opacity 0.3s ease";
   });
