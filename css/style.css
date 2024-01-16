@@ -89,23 +89,15 @@ body{
 
 /* Ubicaciones */
 
-.container h2{
+.container{
   font-family: 'Work Sans', sans-serif;
-  color: white;
+  color: #696969;
+  font-weight: bold;
 }
 
 canvas{
-  width: 50% !important;
-  height: 50% !important;
-}
-
-.temperatura{
-  float: right;
-}
-
-.temperatura span{
-  font-size: 40px;
-  font-weight: bolder;
+  width: 30% !important;
+  height: 30% !important;
 }
 
 .iconoTiempo{
@@ -117,6 +109,28 @@ canvas{
   background-position-y: -225px;
 }
 
+.nav div h5{
+  margin-top: 10px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ubicacion{
+  border-radius: 28px;
+  background: #e0e0e0;
+  box-shadow:  7px 7px 0px #d3d3d3,
+               -7px -7px 0px #ededed;
+  border:1px solid grey;
+}
+
+.nav{
+  border-bottom: 0.1px solid grey;
+  border-bottom-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+}
 
 
 

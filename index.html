@@ -50,8 +50,10 @@
             <div class="swiper-slide">
               <div class="container">
 
-                <h2>San Sebastián</h2>
-                <i class="fa-regular fa-sun"></i>
+                <div class="nav">
+                  <h2>San Sebastián</h2>
+
+                </div>
 
                 <!-- Grafico -->
                 <div>
@@ -103,6 +105,7 @@
   </div>
 
   <!-- Navbar -->
+  <!-- Navbar -->
   <div class="navbar py-3" id="navbar">
     <div class="container">
       <img src="img/suncloud-high-resolution-logo-white-transparent.png" alt="logo-navbar">
@@ -128,12 +131,12 @@
           <form>
             <div class="form-group">
               <label for="CorreoElectronico">Correo electronico</label>
-              <input type="email" class="form-control" id="correoElectronico" placeholder="Correo electronico">
+              <input type="email" class="form-control" id="correoElectronicoR" placeholder="Correo electronico">
 
             </div>
             <div class="form-group">
               <label for="Contraseña">Contraseña</label>
-              <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña">
+              <input type="password" class="form-control" id="ContraseñaR" placeholder="Contraseña">
             </div>
             <div class="form-group">
               <label for="ConfirmarContraseña">Confirmar Contraseña</label>
@@ -161,15 +164,15 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form onsubmit="event.preventDefault(); login(email.value, contrasena.value)">
               <div class="form-group">
                 <label for="CorreoElectronico">Correo electronico</label>
-                <input type="email" class="form-control" id="correoElectronico" placeholder="Correo electronico">
+                <input type="email" class="form-control" id="correoElectronico" placeholder="Correo electronico" name="email">
   
               </div>
               <div class="form-group">
                 <label for="Contraseña">Contraseña</label>
-                <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña">
+                <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña" name="contrasena">
                 <small id="olvidoAyuda" class="form-text text-muted"><u>¿Ha olvidado la contraseña?</u></small>
               </div>
 
@@ -177,12 +180,14 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-primary">Registrarse</button>
+              <input type="submit" class="btn btn-primary">Registrarse</input>
             </div>
           </form>
         </div>
       </div>
     </div>
+
+    <script src="js/login.js"></script>
 
   <!-- BS5 js -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

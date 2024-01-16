@@ -26,13 +26,21 @@
         <div class="swiper mySwiper2 swiper-v">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
-              <div class="container">
+              <div class="container mt-3 ubicacion">
 
-                <h2>San Sebastián</h2>
-                <div class="temperatura">
-                  <div class="iconoTiempo"></div>
-                  <span>33º</span>
+                <div class="row nav">
+                  <div class="col-4">
+                      <h2 class="text-start">San Sebastian</h2>
+                  </div>
+                  <div class="col-4 text-center">
+                      <h5 class="text-center">21/01/2024</h5>
+                  </div>
+                  <div class="col-4">
+                      <h2 class="text-end">14:50</h2>
+                  </div>
                 </div>
+
+                <!-- <div class="iconoTiempo"></div> -->
 
                 <!-- Grafico -->
                 <div>
@@ -41,30 +49,7 @@
                 
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 
-                <script>
-                  const ctx = document.getElementById('myChart');
-                
-                  new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                      datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        borderWidth: 1
-                      }]
-                    },
-                    options: {
-                      scales: {
-                        y: {
-                          beginAtZero: true
-                        }
-                      }
-                    }
-                  });
-                  Chart.defaults.color = 'white';
-                  
-                </script>                
+                <script src="js/grafica.js"></script>
               </div>
 
 
@@ -145,15 +130,15 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form onsubmit="event.preventDefault(); login(email.value, contrasena.value)">
               <div class="form-group">
                 <label for="CorreoElectronico">Correo electronico</label>
-                <input type="email" class="form-control" id="correoElectronico" placeholder="Correo electronico">
+                <input type="email" class="form-control" id="correoElectronico" placeholder="Correo electronico" name="email">
   
               </div>
               <div class="form-group">
                 <label for="Contraseña">Contraseña</label>
-                <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña">
+                <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña" name="contrasena">
                 <small id="olvidoAyuda" class="form-text text-muted"><u>¿Ha olvidado la contraseña?</u></small>
               </div>
 
@@ -161,7 +146,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-primary">Registrarse</button>
+              <input type="submit" class="btn btn-primary">Registrarse</input>
             </div>
           </form>
         </div>
