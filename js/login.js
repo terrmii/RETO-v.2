@@ -1,29 +1,5 @@
 const laravelApi = 'http://localhost:81';
 
-        //comprobar si el usuario ya ha iniciado sesion antes
-        // async function comprobarToken(){
-        //     try {
-        //         let respuesta = await fetch(laravelApi + "/api/comprobarToken", {
-        //             method: "POST",
-        //             headers: {
-        //                 "Content-type": "application/json; charset=UTF-8",
-        //                 Authorization: 'Bearer ' + sessionStorage.getItem("token")
-        //             }
-        //         });
-
-        //     let data = await respuesta.json();
-        //     console.log(data);
-
-        //     } catch (error) {
-        //         console.error(error);
-        //     }
-        // }
-
-        // if(sessionStorage.getItem("token") != null){
-        //     comprobarToken();
-        // }
-        //fin comprobacion sesion del usuario
-
         async function login(correo, contrasena) {
 
             try {
@@ -32,15 +8,45 @@ const laravelApi = 'http://localhost:81';
                     body: JSON.stringify({
                         email: correo,
                         password: contrasena,
-                        remember_me: 'yes'
+                        remember_me: true
                     }),
                     headers: {
-                        "Content-type": "application/json; charset=UTF-8"
+                        "Content-type": "application/json; charset=UTF-8",
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Access-Control-Allow-Origin': '*'
                     }
                 });
-
                 let data = await respuesta.json();
                 console.log(data);
+                console.log("El mail es: " + data["mail"]);
+
+                // Al logearse
+                if (data["access_token"] != null) {
+                    console.log("Cerrando el modal");
+                    var modal = document.getElementById('inicioSesionModal');
+                    ocultar(modal);
+                    
+                    // Ocultar el fondo del modal (modal-backdrop)
+                    var modalFondo = document.getElementsByClassName('modal-backdrop');
+                    
+                    // Recorre todos los elementos con la clase 'modal-backdrop'
+                    for (var i = 0; i < modalFondo.length; i++) {
+                        ocultar(modalFondo[i]);
+                    }
+
+                    var inicioSesion = document.getElementById('botonInicioSesion');
+
+                    ocultar(inicioSesion);
+
+                    var registro = document.getElementById('botonRegistro');
+
+                    ocultar(registro);
+
+                    var mailLogueado = document.getElementById('mailLogueado');
+
+                    mailLogueado.innerHTML = data["mail"];
+                }
+                
 
             } catch (error) {
                 console.error(error);
@@ -85,4 +91,10 @@ const laravelApi = 'http://localhost:81';
             } catch (error) {
                 console.log(error);
             }
+        }
+
+        // Ocultar cosas
+
+        function ocultar(i){
+            i.style.display = 'none';
         }

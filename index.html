@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
 </head>
@@ -105,17 +105,18 @@
   </div>
 
   <!-- Navbar -->
-  <!-- Navbar -->
   <div class="navbar py-3" id="navbar">
     <div class="container">
       <img src="img/suncloud-high-resolution-logo-white-transparent.png" alt="logo-navbar">
       <div class="ms-auto d-grid gap-2 d-lg-block">
-        <button type="button" class="btn link-secondary text-white" data-bs-toggle="modal" data-bs-target="#inicioSesionModal">
+        <button type="button" class="btn link-secondary text-white" id="botonInicioSesion" data-bs-toggle="modal" data-bs-target="#inicioSesionModal">
           Sign in
         </button>
-        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#registroModal">
+        <button type="button" class="btn btn-secondary" id="botonRegistro" data-bs-toggle="modal" data-bs-target="#registroModal">
           Sign up
         </button>
+        <!-- Nombre del usuario -->
+        <span id="mailLogueado"></span>
       </div>
     </div>
   </div>
@@ -180,7 +181,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <input type="submit" class="btn btn-primary">Registrarse</input>
+              <input type="submit" class="btn btn-primary"></input>
             </div>
           </form>
         </div>
@@ -189,12 +190,13 @@
 
     <script src="js/login.js"></script>
 
-  <!-- BS5 js -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
+    
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- BS5 js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS y dependencias (Popper.js y jQuery) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Js Swiper Pers -->
   <script src="js/swiper.js"></script>
 
