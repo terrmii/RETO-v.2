@@ -129,19 +129,22 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form onsubmit="event.preventDefault(); register(name.value, mailR.value, contrasenaR.value)">
             <div class="form-group">
-              <label for="CorreoElectronico">Correo electronico</label>
-              <input type="email" class="form-control" id="correoElectronicoR" placeholder="Correo electronico">
+              <label for="name">Nombre</label>
+              <input type="text" class="form-control" id="name" placeholder="Nombre" name="name">
+              
+            </div>
+            <div class="form-group">
+              
+              <label for="mailR">Correo electronico</label>
+              <input type="email" name="mailR" class="form-control" id="mailR" placeholder="Correo electronico">
+            </div>
+            <div class="form-group">
 
-            </div>
-            <div class="form-group">
-              <label for="Contraseña">Contraseña</label>
-              <input type="password" class="form-control" id="ContraseñaR" placeholder="Contraseña">
-            </div>
-            <div class="form-group">
-              <label for="ConfirmarContraseña">Confirmar Contraseña</label>
-              <input type="password" class="form-control" id="ConfirmarContraseña" placeholder="Contraseña">
+              <label for="ContraseñaR">Contraseña</label>
+              <input type="password" name="contrasenaR" class="form-control" id="ContraseñaR" placeholder="Contraseña">
+
               <small id="contraseñaAyuda" class="form-text text-muted">¿Ya tiene cuenta?<a style="cursor: pointer;" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#inicioSesionModal">
               <u>Inicie sesión aqui</u>
               </a></small>
@@ -149,7 +152,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Registrarse</button>
+            <input type="submit" class="btn btn-primary"></input>
           </div>
         </form>
       </div>
