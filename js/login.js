@@ -44,7 +44,14 @@ const laravelApi = 'http://localhost:81';
 
                     var mailLogueado = document.getElementById('mailLogueado');
 
-                    mailLogueado.innerHTML = data["mail"];
+                    // Dividir la cadena en dos partes usando el carácter "@"
+                    var partes = data["mail"].split("@");
+
+                    // Tomar la primera parte (el nombre antes de "@")
+                    var nombre = partes[0];
+
+                    // Bienvenida al usuario
+                    mailLogueado.innerHTML = 'Bienvenido, '+nombre;
                 }
                 
 

@@ -70,6 +70,10 @@ body{
     font-family: 'Work Sans', sans-serif;
 }
 
+.navbar #mailLogueado{
+  color: white;
+}
+
 @media (max-width: 991px) {
     .navbar .btn {
       font-size: 0.8rem;
