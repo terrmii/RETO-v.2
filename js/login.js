@@ -17,8 +17,6 @@ const laravelApi = 'http://localhost:81';
                     }
                 });
                 let data = await respuesta.json();
-                // console.log(data);
-                // console.log("El mail es: " + data["mail"]);
 
                 // Al logearse
                 if (data["access_token"] != null) {
@@ -31,8 +29,16 @@ const laravelApi = 'http://localhost:81';
 
                     var nombre = partes[0];
 
+                    sessionStorage.setItem("AccessToken", data["access_token"]);
+                    
+                    // Mostrar boton logout
+                    var botonLogout = document.getElementById('botonLogout');
+
+                    botonLogout.style.display = 'inline-block';
+
                     // Bienvenida al usuario
-                    mailLogueado.innerHTML = 'Bienvenido, '+nombre;
+                    mailLogueado.innerHTML = 'Bienvenido, <b>'+nombre+'</b>';
+
                 }
                 
             } catch (error) {
@@ -62,6 +68,7 @@ const laravelApi = 'http://localhost:81';
                 if([data["message"] == 'Successfully created user!']){
 
                     login(data["mail"], data["password"]);
+                    
                 }
 
             } catch (error) {
@@ -71,15 +78,18 @@ const laravelApi = 'http://localhost:81';
 
         async function logout(){
             try {
-                let respuesta = await fetch(laravelApi + "/api/logout", {
+                let respuesta = await fetch(laravelApi + "/api/auth/logout", {
                     headers: {
                         "Content-type": "application/json; charset=UTF-8",
-                        Authorization: 'Bearer ' + sessionStorage.getItem("token")
+                        'X-Requested-With': 'XMLHttpRequest',
+                        Authorization: 'Bearer ' + sessionStorage.getItem("AccessToken")
                     }
                 });
                 
                 let data = await respuesta.json();
                 console.log(data);
+
+                sessionStorage.removeItem("AccessToken");
 
             } catch (error) {
                 console.log(error);

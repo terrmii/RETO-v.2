@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
 </head>
@@ -20,29 +20,7 @@
     <div class="swiper-wrapper">
       <!-- Inicio -->
       <div class="swiper-slide">
-        <div class="inicio">
-          <img src="img/suncloud-high-resolution-logo-white-transparent.png" alt="Logo-grande" class="logo-inicio">
-          <h2>Planifica tu día con certeza. <br>Consulta nuestro pronóstico del tiempo en un solo click <br>¡Descúbrelo ahora!</h2>
-          <a href=""><i class="fa-regular fa-circle-down fa-2xl"></i></a>
-        </div>
-        <div id="contenido">
-          <!-- Contenido de las diferentes vistas se cargará aquí -->
-        </div>
-      </div>
-      <!-- Mapa -->
-      <div class="swiper-slide">
-        <div class="mapa">
-            <div class="container">
-                <h1 class="text-center text-white">Seleccione una baliza para visualizar el tiempo.</h1>
-    
-                <div id="map"></div>
-            </div>
-        </div>
-        <!-- Js Leaftlet -->
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-        <!-- Js leaftlet pers -->
-        <script src="js/mapa.js"></script>
-      </div>
+
       <!-- Ubicaciones -->
       <div class="swiper-slide">
         <div class="swiper mySwiper2 swiper-v">
@@ -106,42 +84,7 @@
                               <div class="row">
 
                                 <div>
-                                  <div class="top text-center">
-
-                                    <div class="" >
-                                      <label for="desde">Desde</label>
-                                      <input type="date" name="" id="desde">
-                                    </div>
-
-                                    
-                                    <label for="hasta">Hasta</label>
-                                    <input type="date" name="" id="hasta">
-                                  </div>
                                   <canvas id="myChart"></canvas>
-                                </div>
-
-                                <div class="bottom da text-center">
-                                  <span class="top">Dias anteriores</span>
-                                    <div class="col border">
-                                      <div class="row">Sab</div>
-                                      <div class="row"><b>-4&deg;</b></div>
-                                    </div>
-                                    <div class="col border">
-                                      <div class="row">Dom</div>
-                                      <div class="row"><b>3&deg;</b></div>
-                                    </div>
-                                    <div class="col border">
-                                      <div class="row">Lun</div>
-                                      <div class="row"><b>-3&deg;</b></div>
-                                    </div>
-                                    <div class="col border">
-                                      <div class="row">Mar</div>
-                                      <div class="row"><b>1&deg;</b></div>
-                                    </div>
-                                    <div class="col border">
-                                      <div class="row">Mie</div>
-                                      <div class="row"><b>2&deg;</b></div>
-                                    </div>
                                 </div>
                                 
                                 
@@ -176,15 +119,12 @@
     <div class="container">
       <img src="img/suncloud-high-resolution-logo-white-transparent.png" alt="logo-navbar">
       <div class="ms-auto d-grid gap-2 d-lg-block">
-        <button type="button" class="btn link-secondary text-white" id="botonInicioSesion" data-bs-toggle="modal" data-bs-target="#inicioSesionModal">
+        <button type="button" class="btn link-secondary text-white" data-bs-toggle="modal" data-bs-target="#inicioSesionModal">
           Sign in
         </button>
-        <button type="button" class="btn btn-secondary" id="botonRegistro" data-bs-toggle="modal" data-bs-target="#registroModal">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#registroModal">
           Sign up
         </button>
-        <!-- Nombre usuario y logout -->
-        <span id="mailLogueado" style="display: inline-block;"></span>
-        <i class="fa-solid fa-right-from-bracket" onclick="logout()" id="botonLogout" style="display: none; cursor: pointer; color: white;"></i>
       </div>
     </div>
   </div>
@@ -197,21 +137,19 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form onsubmit="event.preventDefault(); register(name.value, mailR.value, contrasenaR.value)">
+          <form>
             <div class="form-group">
-              <label for="name">Nombre</label>
-              <input type="text" class="form-control" id="name" placeholder="Nombre" name="name">
+              <label for="CorreoElectronico">Correo electronico</label>
+              <input type="email" class="form-control" id="correoElectronico" placeholder="Correo electronico">
+
             </div>
             <div class="form-group">
-              
-              <label for="mailR">Correo electronico</label>
-              <input type="email" name="mailR" class="form-control" id="mailR" placeholder="Correo electronico">
+              <label for="Contraseña">Contraseña</label>
+              <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña">
             </div>
             <div class="form-group">
-
-              <label for="ContraseñaR">Contraseña</label>
-              <input type="password" name="contrasenaR" class="form-control" id="ContraseñaR" placeholder="Contraseña">
-
+              <label for="ConfirmarContraseña">Confirmar Contraseña</label>
+              <input type="password" class="form-control" id="ConfirmarContraseña" placeholder="Contraseña">
               <small id="contraseñaAyuda" class="form-text text-muted">¿Ya tiene cuenta?<a style="cursor: pointer;" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#inicioSesionModal">
               <u>Inicie sesión aqui</u>
               </a></small>
@@ -219,7 +157,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <input type="submit" class="btn btn-primary"></input>
+            <button type="submit" class="btn btn-primary">Registrarse</button>
           </div>
         </form>
       </div>
@@ -251,24 +189,21 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <input type="submit" class="btn btn-primary"></input>
+              <input type="submit" class="btn btn-primary">Registrarse</input>
             </div>
           </form>
         </div>
       </div>
     </div>
 
-    <script src="js/login.js"></script>
+  <!-- BS5 js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <!-- BS5 js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Bootstrap JS y dependencias (Popper.js y jQuery) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Js Swiper Pers -->
-    <script src="js/swiper.js"></script>
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Js Swiper Pers -->
+  <script src="js/swiper.js"></script>
 
 </body>
 

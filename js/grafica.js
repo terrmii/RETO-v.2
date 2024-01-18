@@ -17,7 +17,7 @@ new Chart(ctx, {
     scales: {
       x: {
         ticks: {
-          color: 'white',
+          color: 'black',
           font: {
             size: 12,
             family: 'Work Sans',
@@ -29,7 +29,7 @@ new Chart(ctx, {
       y: {
         beginAtZero: true,
         ticks: {
-          color: 'white',
+          color: 'black',
           font: {
             size: 14,
             family: 'Work Sans',
@@ -42,7 +42,7 @@ new Chart(ctx, {
     plugins: {
       legend: { 
         labels: {
-          color: 'white',
+          color: 'black',
           fontSize: 14,
           fontFamily: 'Work Sans',
           textShadow: '0 0 4px rgb(3, 3, 3)',

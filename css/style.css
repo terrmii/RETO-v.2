@@ -93,48 +93,172 @@ body{
 
 /* Ubicaciones */
 
+body{
+  align-items: center;
+  justify-content: center;
+  background-color: lavender;
+  font-family: sans-serif;
+}
+.card p{
+  margin-bottom: 1vh;
+}
 .container{
-  font-family: 'Work Sans', sans-serif;
-  color: #696969;
+  justify-content: center;
+}
+.card{
+  margin-top: 5vh !important;
+  border: 1.5vh solid black;
+  max-width: 100vmax;
+  border-radius: 2vh;
+  margin: auto;
+}
+.col-8{
+  border-top-left-radius: 0.5vh;
+  border-bottom-left-radius: 0.5vh;
+}
+.left{
+  background-color: rgb(243, 243, 243);
+  padding: 1rem;
+  margin: 0;
+}
+.right{
+  padding: 1rem;
+}
+.row,.col{
+  margin: 0;
+}
+.top{
+  text-align: center;
+  font-size: 0.65rem;
+  padding: 2vh;
+}
+@media(max-width:768px){
+  .top{
+      text-align: center;
+      font-size: 0.5rem;
+      padding: 1vh;
+  }
+  .top .col{
+      padding:0 0.5vh;
+  }
+}
+.temp{
+  padding: 8vh;
+  text-align: center;
+  font-size: 22vh !important;
   font-weight: bold;
+}
+@media(max-width:768px)
+{
+  .temp{
+      padding: 3vh 0vh;
+      text-align: center;
+      font-size: 9vh;
+      font-weight: bold;
+  }
+}
+@media(min-height:812px) and (min-width:769px)
+{
+  .temp{
+      padding: 3vh 0vh;
+      text-align: center;
+      font-size: 9vh;
+      font-weight: bold;
+  }
+}
+.deg{
+  height: 50%;
+  background-color: rgb(189, 188, 188);
+  border-radius: 5rem;
+}
+.time{
+  align-self: center;
+  font-size: 0.8rem;
+}
+@media(max-width:768px)
+{
+  .time{
+      align-self: center;
+      font-size: o.8rem;
+  }
+  .time h2{
+      font-size: 0.9rem;
+  }
+  .col-5{
+      padding: 1vh 0;
+  }
+}
+.bottom .row{
+  justify-content: center;
+  font-size: 0.75rem;
+}
+.bottom .col{
+  padding: 3vh 0.3vw ;
+  margin: 2vh;
+}
+/* .bottom{
+  padding-top: 12vmax;
+} */
+@media(max-width:768px){
+  .bottom .col{
+      padding: 3vh 0.1vw;
+      margin: 0.03rem;
+  }  
+}
+@media(min-height:812px) and (min-width:769px)
+{
+  .bottom .col{
+      padding: 3vh 0.1vw;
+      margin: 0.03rem;
+  }  
+}
+.border{
+  border-radius: 2vh;
+}
+.right .top{
+  justify-content: flex-end;
+  text-align: right;
+}
+
+@media(max-width:768px){
+  .timely .row{
+      justify-content: flex-end;
+      padding: 2vh 0;
+      font-size: 0.52rem;
+  }
+}
+@media(max-width:320px)
+{
+  hr{
+      width: 0;
+      margin: 0;
+  }
+}
+
+.card b{
+  text-align: center;
+  margin-top: 2px;
+}
+
+.prec{
+  margin-left: 12vh !important;
+  margin-top: -6vh !important;
+  padding-bottom: 3vh !important;
 }
 
 canvas{
-  width: 30% !important;
-  height: 30% !important;
+  width: 90% !important;
+  height: 70% !important;
 }
 
-.iconoTiempo{
-  width: 62px;
-  height: 70px;
-  background-image: url(../img/iconos-removebg-preview.png);
-  background-repeat: no-repeat;
-  background-position-x: -170px;
-  background-position-y: -225px;
+.da{
+  padding: 1em !important;
 }
 
-.nav div h5{
-  margin-top: 10px;
+.da .col{
+  padding: 0.2em;
 }
 
-.flex-container {
-  display: flex;
-  justify-content: space-between;
+.da .border:hover{
+  border: 1px solid black !important;
 }
-
-.ubicacion{
-  border-radius: 28px;
-  background: #e0e0e0;
-  box-shadow:  7px 7px 0px #d3d3d3,
-               -7px -7px 0px #ededed;
-  border:1px solid grey;
-}
-
-.nav{
-  border-bottom: 0.1px solid grey;
-  border-bottom-left-radius: 28px;
-  border-bottom-right-radius: 28px;
-}
-
-
-
