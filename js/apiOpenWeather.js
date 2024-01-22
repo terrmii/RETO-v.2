@@ -1,6 +1,6 @@
 const apiOpenWeather = 'https://api.openweathermap.org/data/2.5/weather?q=';
 const tokenApiOpenWeather = '253682c0bd759acfb4255d4aa08c3dd7'
-const laravelApi = 'http://localhost:82';
+const laravelApiTiempo = 'http://localhost:82';
 
 async function recogerDatos() {
 
@@ -21,7 +21,6 @@ async function recogerDatos() {
             humedad: data.main.humidity,
             viento: data.wind.speed,
             descripcion: data.weather[0].description,
-            // Agrega otros campos según la estructura de tu modelo Laravel
         });
 
     } catch (error) {
@@ -29,19 +28,21 @@ async function recogerDatos() {
     }
 }
 
-function enviarDatosALaravel(datos) {
-    const urlLaravel = `${laravelApi}/api/datos-tiempo`;
+async function enviarDatosALaravel(datos) {
+    const urlLaravel = `${laravelApiTiempo}/api/datos-tiempo`;
 
-    fetch(urlLaravel, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datos),
-    })
-    .then(response => response.json())
-    .then(responseData => {
+    try {
+        const response = await fetch(urlLaravel, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(datos),
+        });
+
+        const responseData = await response.json();
         console.log(responseData);
-    })
-    .catch(error => console.error('Error:', error));
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
