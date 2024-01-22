@@ -38,6 +38,8 @@ const laravelApi = 'http://localhost:81';
                     var mailLogueado = document.getElementById('mailLogueado');
                     mailLogueado.innerHTML = 'Bienvenido, <b>'+nombre+'</b>';
 
+                    var registroModal = document.getElementById('registroModal');
+                   registroModal.style.display = '';
                 }
                 
             } catch (error) {
@@ -77,46 +79,50 @@ const laravelApi = 'http://localhost:81';
 
         async function comprobarUsuario(){
 
-            var tokenEntero = sessionStorage.getItem("AccessToken").split(",");
-            var token = tokenEntero[0];
-
-            try {
-                let respuesta = await fetch(laravelApi + "/api/auth/user", {
-                    method: "GET",
-                    headers: {
-                        "Content-type": "application/json; charset=UTF-8",
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'Authorization': 'Bearer '+token
-                    }
-                });
-
-                let data = await respuesta.json();
-                console.log(data);
-
-                if (data.hasOwnProperty("message")) {
-                    if (data.message === "Unauthenticated.") {
-                        // Manejar el caso de autenticación no exitosa
-                        console.log("Usuario no autenticado");
+            if(sessionStorage.getItem("AccessToken")!= null){
+                var tokenEntero = sessionStorage.getItem("AccessToken").split(",");
+                var token = tokenEntero[0];
+                
+                try {
+                    let respuesta = await fetch(laravelApi + "/api/auth/user", {
+                        method: "GET",
+                        headers: {
+                            "Content-type": "application/json; charset=UTF-8",
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Authorization': 'Bearer ' + token
+                        }
+                    });
+    
+                    let data = await respuesta.json();
+    
+                    if (data.hasOwnProperty("message")) {
+                        if (data.message === "Unauthenticated.") {
+                            // Manejar el caso de autenticación no exitosa
+                            console.log("Usuario no autenticado");
+                        } else {
+                            // Manejar otros posibles mensajes de error
+                            console.log("Error desconocido:", data.message);
+                        }
                     } else {
-                        // Manejar otros posibles mensajes de error
-                        console.log("Error desconocido:", data.message);
+                        // Manejar el caso de autenticación exitosa
+                        const usuario = {
+                            id: data.id,
+                            name: data.name,
+                            email: data.email,
+                            email_verified_at: data.email_verified_at,
+                            created_at: data.created_at,
+                            updated_at: data.updated_at
+                        };
+                        console.log("Usuario autenticado:", usuario);
                     }
-                } else {
-                    // Manejar el caso de autenticación exitosa
-                    const usuario = {
-                        id: data.id,
-                        name: data.name,
-                        email: data.email,
-                        email_verified_at: data.email_verified_at,
-                        created_at: data.created_at,
-                        updated_at: data.updated_at
-                    };
-                    console.log("Usuario autenticado:", usuario);
+    
+                } catch (error) {
+                    console.error(error);
                 }
 
-            } catch (error) {
-                console.error(error);
+                
             }
+
 
         }
 
@@ -142,6 +148,14 @@ const laravelApi = 'http://localhost:81';
                 sessionStorage.removeItem("AccessToken");
 
                 mostrarModal();
+
+                 // Ocultar el fondo del modal (modal-backdrop)
+                var modalFondo = document.getElementsByClassName('modal-backdrop');
+                
+                // Recorre todos los elementos con la clase 'modal-backdrop'
+                for (var i = 0; i < modalFondo.length; i++) {
+                    ocultar(modalFondo[i]);
+                }
 
             } catch (error) {
                 console.log(error);
@@ -209,6 +223,10 @@ const laravelApi = 'http://localhost:81';
             var registro = document.getElementById('botonRegistro');
 
             ocultar(registro);
+
+            // Ocultar nombre de usuario
+            var mailLogueado = document.getElementById('mailLogueado');
+            mailLogueado.style.display = 'inline-block';
         }
 
         function mostrarModal(){
@@ -234,6 +252,10 @@ const laravelApi = 'http://localhost:81';
             // Ocultar (modal-fade)
             var modalFade = document.getElementById('registroModal');
             ocultar(modalFade);
+
+            // Ocultar (modal-fade)
+            var modalFadeInicio = document.getElementById('inicioSesionModal');
+            ocultar(modalFadeInicio);
 
             var inicioSesion = document.getElementById('botonInicioSesion');
             inicioSesion.style.display = '';
