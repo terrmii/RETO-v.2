@@ -167,7 +167,26 @@
       <div class="swiper-slide">
         <!-- Prueba -->
         <button type="button" onclick="recogerDatos()">Probando cosas</button>
+
+        <table id="tablaDatos">
+          <thead>
+              <tr>
+                  <th>Nombre</th>
+                  <th>Temperatura</th>
+                  <th>Humedad</th>
+                  <th>Viento</th>
+                  <th>Descripción</th>
+                  <!-- Agrega otras columnas según la estructura de tus datos -->
+              </tr>
+          </thead>
+          <tbody>
+              <!-- Los datos se agregarán aquí dinámicamente -->
+          </tbody>
+      </table>
+      
+
         <script src="js/apiOpenWeather.js"></script>
+
       </div>
     </div>
     <div class="swiper-pagination">
