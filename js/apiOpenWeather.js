@@ -2,40 +2,45 @@ const apiOpenWeather = 'https://api.openweathermap.org/data/2.5/weather?q=';
 const tokenApiOpenWeather = '253682c0bd759acfb4255d4aa08c3dd7'
 const laravelApiTiempo = 'http://localhost:82';
 
+var ciudades = ['donostia', 'irun', 'hondarribia', 'errenteria']
+
 async function recogerDatos() {
     console.log('antes de intentar');
 
-    try {
-        // Obtener datos de la API externa
-        let respuestaExterna = await fetch(apiOpenWeather + "donostia&appid=" + tokenApiOpenWeather + "&units=metric&lang=es", {
-            method: "GET",
-        });
-
-        let datosExterna = await respuestaExterna.json();
-        console.log('Datos externos:', datosExterna);
-
-        // Enviar datos a Laravel
-        enviarDatosALaravel({
-            nombre: datosExterna.name,
-            temperatura: datosExterna.main.temp,
-            humedad: datosExterna.main.humidity,
-            viento: datosExterna.wind.speed,
-            descripcion: datosExterna.weather[0].description,
-        });
-
-        // Obtener datos de la API de Laravel
-        let respuestaLaravel = await fetch(`${laravelApiTiempo}/api/datos-tiempo`, {
-            method: "GET",
-        });
-
-        let datosLaravel = await respuestaLaravel.json();
-        console.log('Datos de Laravel:', datosLaravel);
-
-        // Mostrar los datos en tu página HTML
-        mostrarDatosEnPagina(datosLaravel.datos_tiempo);
-
-    } catch (error) {
-        console.error(error);
+    for (const ciudad of ciudades) {
+        
+            try {
+            // Obtener datos de la API externa
+            let respuestaExterna = await fetch(apiOpenWeather + ciudad +"&appid=" + tokenApiOpenWeather + "&units=metric&lang=es", {
+                method: "GET",
+            });
+            
+            let datosExterna = await respuestaExterna.json();
+            console.log('Datos externos:', datosExterna);
+            
+            // Enviar datos a Laravel
+            enviarDatosALaravel({
+                nombre: datosExterna.name,
+                temperatura: datosExterna.main.temp,
+                humedad: datosExterna.main.humidity,
+                viento: datosExterna.wind.speed,
+                descripcion: datosExterna.weather[0].description,
+            });
+            
+            // Obtener datos de la API de Laravel
+            let respuestaLaravel = await fetch(`${laravelApiTiempo}/api/datos-tiempo`, {
+                method: "GET",
+            });
+            
+            let datosLaravel = await respuestaLaravel.json();
+            console.log('Datos de Laravel:', datosLaravel);
+            
+            // Mostrar los datos en tu página HTML
+            mostrarDatosEnPagina(datosLaravel.datos_tiempo);
+            
+        } catch (error) {
+            console.error(error);
+        }
     }
 }
 
