@@ -23,7 +23,7 @@
         <div class="inicio">
           <img src="img/suncloud-high-resolution-logo-white-transparent.png" alt="Logo-grande" class="logo-inicio">
           <h2>Planifica tu día con certeza. <br>Consulta nuestro pronóstico del tiempo en un solo click <br>¡Descúbrelo ahora!</h2>
-          <a href=""><i class="fa-regular fa-circle-down fa-2xl"></i></a>
+          <i class="fa-regular fa-circle-down fa-2xl"></i>
         </div>
         <div id="contenido">
           <!-- Contenido de las diferentes vistas se cargará aquí -->
@@ -164,30 +164,7 @@
         
       </div>
       <!-- Mi perfil -->
-      <div class="swiper-slide">
-        <!-- Prueba -->
-        <button type="button" onclick="recogerDatos()">Probando cosas</button>
-
-        <table id="tablaDatos">
-          <thead>
-              <tr>
-                  <th>Nombre</th>
-                  <th>Temperatura</th>
-                  <th>Humedad</th>
-                  <th>Viento</th>
-                  <th>Descripción</th>
-                  <!-- Agrega otras columnas según la estructura de tus datos -->
-              </tr>
-          </thead>
-          <tbody>
-              <!-- Los datos se agregarán aquí dinámicamente -->
-          </tbody>
-      </table>
-      
-
-        <script src="js/apiOpenWeather.js"></script>
-
-      </div>
+      <div class="swiper-slide">Slider 4</div>
     </div>
     <div class="swiper-pagination">
       <i class="fa-solid fa-cloud"></i>
@@ -242,7 +219,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <input type="submit" class="btn btn-primary"></input>
+            <input type="submit" class="btn btn-primary" value="Registrarse">
           </div>
         </form>
       </div>
@@ -260,7 +237,7 @@
           <div class="modal-body">
             <form onsubmit="event.preventDefault(); login(email.value, contrasena.value)">
               <div class="form-group">
-                <label for="CorreoElectronico">Correo electronico</label>
+                <label for="correoElectronico">Correo electronico</label>
                 <input type="email" class="form-control" id="correoElectronico" placeholder="Correo electronico" name="email">
   
               </div>
@@ -274,7 +251,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <input type="submit" class="btn btn-primary"></input>
+              <input type="submit" class="btn btn-primary" value="Iniciar Sesion">
             </div>
           </form>
         </div>
