@@ -14,7 +14,7 @@
 
 </head>
 
-<body>
+<body onload="crearBalizas()">
   <!-- Swiper -->
   <div class="swiper mySwiper">
     <div class="swiper-wrapper">
@@ -33,7 +33,7 @@
       <div class="swiper-slide">
         <div class="mapa">
             <div class="container">
-                <h1 class="text-center text-white">Seleccione una baliza para visualizar el tiempo.</h1>
+                <h1 class="text-center text-white" onclick="crearBalizas()" style="cursor: pointer;">Seleccione una baliza para visualizar el tiempo.</h1>
     
                 <div id="map"></div>
             </div>
