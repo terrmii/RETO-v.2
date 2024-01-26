@@ -1,8 +1,9 @@
 // Declare swiper2 in the global scope
 var swiper2;
+var swiper;
 
 document.addEventListener("DOMContentLoaded", function () {
-    var swiper = new Swiper(".mySwiper", {
+    swiper = new Swiper(".mySwiper", {
       direction: 'vertical',
       slidesPerView: 1,
       spaceBetween: 30,

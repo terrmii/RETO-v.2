@@ -55,6 +55,7 @@ async function crearBalizas() {
                 marker.getElement().classList.remove('guardado');
               }else{
                 marker.getElement().classList.add('guardado');
+
               }
 
               if (guardados != null) {
