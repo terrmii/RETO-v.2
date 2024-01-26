@@ -20,33 +20,55 @@ let southernMountain = [];
 let vitoriaGasteiz = [];
 
 async function crearBalizas() {
-    try {
-        const response = await fetch(`${laravelApi}/api/obtener-ubicaciones`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8',
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-        });
+  try {
+      const response = await fetch(`${laravelApi}/api/obtener-ubicaciones`, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json; charset=UTF-8',
+              'X-Requested-With': 'XMLHttpRequest'
+          },
+      });
 
-        const data = await response.json();
+      const data = await response.json();
+      var guardados;
 
-        // Por ejemplo, puedes recorrer los datos y mostrarlos en la consola
-        data.ubicaciones.forEach(async ubicacion => {
-            // Crear marcador en el mapa
-            var marker = L.marker([ubicacion.latitud, ubicacion.longitud]).addTo(map);
-            marker.bindTooltip("<b>"+ubicacion.nombre+"</b><br>",{
-                direction : 'top',
-                offset: L.point(-15, -20)
-            });
+      // Eliminar eventos de clic existentes antes de agregar nuevos
+      map.off('click', 'markerClick');
 
-            // Agregar el nombre a la variable nombresUbicaciones
-            nombresUbicaciones.push(ubicacion.nombre);
-        });
-    } catch (error) {
-    //    Quito el error ya que aparece que la variable de apiLaravel no tiene valor cuando si que tiene
-    }
+      // Por ejemplo, puedes recorrer los datos y agregar nuevos marcadores
+      data.ubicaciones.forEach(ubicacion => {
+          // Crear marcador en el mapa
+          var marker = L.marker([ubicacion.latitud, ubicacion.longitud]).addTo(map);
+          marker.bindTooltip("<b>" + ubicacion.nombre + "</b><br>", {
+              direction: 'top',
+              offset: L.point(-15, -20)
+          });
+
+          // Agregar el nombre a la variable nombresUbicaciones
+          nombresUbicaciones.push(ubicacion.nombre);
+
+          // Agregar el evento de clic
+          marker.on('click', function () {
+              guardados = localStorage.getItem('guardados');
+              // Cambiar color
+              if(marker.getElement().classList.contains('guardado')){
+                marker.getElement().classList.remove('guardado');
+              }else{
+                marker.getElement().classList.add('guardado');
+              }
+
+              if (guardados != null) {
+                  localStorage.setItem('guardados', guardados + ',' + ubicacion.nombre);
+              } else {
+                  localStorage.setItem('guardados', ubicacion.nombre);
+              }
+          });
+      });
+  } catch (error) {
+      // Manejar el error adecuadamente
+  }
 }
+
 
 crearBalizas().then(() => {
     

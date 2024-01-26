@@ -144,7 +144,7 @@ function crearCard() {
                       </div>
                   </div>
                   
-
+                  <script src="js/grafica.js"></script>
                 </div>
           </div>
       </div>
@@ -152,13 +152,31 @@ function crearCard() {
       </div>
     `;
   
-    // Append the new slide to the swiper wrapper
     ubicacionesCardsWrapper.appendChild(newSlide);
   
-    // Initialize or update Swiper after adding the new slide
-    // Make sure to call this if you are adding slides dynamically
-    // (assuming you have a variable named mySwiper2 initialized for your second Swiper instance)
     swiper2.update();
   }
   
+  function pruebaDatosNombre(){
+
+    const laravelApiTiempo = 'http://localhost:81'
+
+    const nombreUbicacionABuscar = 'Irun';
+
+    fetch(`${laravelApiTiempo}/api/obtener-datos-nombre/${nombreUbicacionABuscar}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // Puedes manejar los datos en la respuesta
+        })
+        .catch(error => console.error(error));
+
+  }
+
+  pruebaDatosNombre();
 

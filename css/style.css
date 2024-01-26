@@ -91,6 +91,12 @@ body{
     
  }
 
+ /* Cambiar el color de las balizas al hacer click */
+
+.guardado{
+  filter: hue-rotate(140deg) brightness(100%);
+}
+
 /* Ubicaciones */
 
 body{
