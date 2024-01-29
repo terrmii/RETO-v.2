@@ -35,7 +35,10 @@ async function crearBalizas() {
       // Eliminar eventos de clic existentes antes de agregar nuevos
       map.off('click', 'markerClick');
 
-      // Por ejemplo, puedes recorrer los datos y agregar nuevos marcadores
+      // Recoger ubicaciones guardadas del Local Storage
+      guardados = localStorage.getItem('guardados');
+      var ubicacionesGuardadas = guardados ? guardados.split(',') : [];
+
       data.ubicaciones.forEach(ubicacion => {
           // Crear marcador en el mapa
           var marker = L.marker([ubicacion.latitud, ubicacion.longitud]).addTo(map);
@@ -47,28 +50,42 @@ async function crearBalizas() {
           // Agregar el nombre a la variable nombresUbicaciones
           nombresUbicaciones.push(ubicacion.nombre);
 
+          // Verificar si la ubicación está guardada y agregar la clase
+          if (ubicacionesGuardadas.includes(ubicacion.nombre)) {
+              marker.getElement().classList.add('guardado');
+          }
+
           // Agregar el evento de clic
           marker.on('click', function () {
-              guardados = localStorage.getItem('guardados');
               // Cambiar color
-              if(marker.getElement().classList.contains('guardado')){
-                marker.getElement().classList.remove('guardado');
-              }else{
-                marker.getElement().classList.add('guardado');
-
-              }
-
-              if (guardados != null) {
-                  localStorage.setItem('guardados', guardados + ',' + ubicacion.nombre);
+              if (marker.getElement().classList.contains('guardado')) {
+                  marker.getElement().classList.remove('guardado');
+                  // Eliminar la ubicación del arreglo de guardados
+                  ubicacionesGuardadas = ubicacionesGuardadas.filter(nombre => nombre !== ubicacion.nombre);
               } else {
-                  localStorage.setItem('guardados', ubicacion.nombre);
+                  marker.getElement().classList.add('guardado');
+                  // Agregar la ubicación al arreglo de guardados
+                  ubicacionesGuardadas.push(ubicacion.nombre);
               }
+
+              // Actualizar el localStorage
+              localStorage.setItem('guardados', ubicacionesGuardadas.join(','));
+
+              console.log('Ubicaciones guardadas en el LS: ' + localStorage.getItem('guardados'));
           });
       });
+
   } catch (error) {
       // Manejar el error adecuadamente
   }
 }
+
+crearBalizas().then(() => {
+  setTimeout(() => {
+      console.log('Nombres de ubicaciones:', nombresUbicaciones);
+  }, 2000);
+});
+
 
 
 crearBalizas().then(() => {
