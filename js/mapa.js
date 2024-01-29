@@ -71,7 +71,6 @@ async function crearBalizas() {
               // Actualizar el localStorage
               localStorage.setItem('guardados', ubicacionesGuardadas.join(','));
 
-              console.log('Ubicaciones guardadas en el LS: ' + localStorage.getItem('guardados'));
           });
       });
 
@@ -85,16 +84,6 @@ crearBalizas().then(() => {
       console.log('Nombres de ubicaciones:', nombresUbicaciones);
   }, 2000);
 });
-
-
-
-crearBalizas().then(() => {
-    
-    setTimeout(() => {
-        console.log('Nombres de ubicaciones:', nombresUbicaciones);
-    }, 2000); 
-});
-
 
 
 
