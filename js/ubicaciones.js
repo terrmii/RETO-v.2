@@ -40,21 +40,25 @@ function obtenerFecha() {
 obtenerFecha();
 
 function crearCard() {
-    // Get the swiper wrapper element with the class "ubicacionesCards" in the second Swiper instance
-    const ubicacionesCardsWrapper = document.querySelector('.mySwiper2 .ubicacionesCards');
-  
-    // Create a new swiper slide
-    const newSlide = document.createElement('div');
-    newSlide.className = 'swiper-slide';
-  
-    // Add your card HTML content to the new slide
-    newSlide.innerHTML = `
+  // Get the swiper wrapper element with the class "ubicacionesCards" in the second Swiper instance
+  const ubicacionesCardsWrapper = document.querySelector('.mySwiper2 .ubicacionesCards');
+
+  // Iterate over each nombre in ubicacionesGuardadas
+  for (var nombre of ubicacionesGuardadas) {
+      console.log(nombre);
+
+      // Create a new swiper slide for each nombre
+      const newSlide = document.createElement('div');
+      newSlide.className = 'swiper-slide';
+
+      // Add your card HTML content to the new slide
+      newSlide.innerHTML = `
       <div class="container">
       <div class="card">
       <div class="row">
           <div class="col-9 left">
               <div class="row top">
-                  <div class="col">San Sebastian</div>
+                  <div class="col">${nombre}</div>
                   <!-- Fecha actual -->
                   <div class="col"><span id="fecha"></span></div>
                   <!-- Hora actualizada cada 15 segs -->
@@ -146,16 +150,17 @@ function crearCard() {
                   
                   <script src="js/grafica.js"></script>
                 </div>
+              </div>
+            </div>
           </div>
-      </div>
-  </div>
-      </div>
-    `;
-  
-    ubicacionesCardsWrapper.appendChild(newSlide);
-  
-    swiper2.update();
+        </div>`;
+
+      ubicacionesCardsWrapper.appendChild(newSlide);
   }
+
+  swiper2.update();
+}
+
   
   function pruebaDatosNombre(){
 

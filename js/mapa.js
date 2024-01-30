@@ -6,7 +6,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 
-let nombresUbicaciones = []; // Variable para almacenar los nombres de ubicaciones
+var nombresUbicaciones = []; // Variable para almacenar los nombres de ubicaciones
 
 // Zonas
 let cantabrianMountains = [];
@@ -18,6 +18,8 @@ let interiorBasins = [];
 let pyrenees = [];
 let southernMountain = [];
 let vitoriaGasteiz = [];
+
+var ubicacionesGuardadas;
 
 async function crearBalizas() {
   try {
@@ -37,7 +39,7 @@ async function crearBalizas() {
 
       // Recoger ubicaciones guardadas del Local Storage
       guardados = localStorage.getItem('guardados');
-      var ubicacionesGuardadas = guardados ? guardados.split(',') : [];
+      ubicacionesGuardadas = guardados ? guardados.split(',') : [];
 
       data.ubicaciones.forEach(ubicacion => {
           // Crear marcador en el mapa
