@@ -59,20 +59,7 @@ async function crearBalizas() {
 
           // Agregar el evento de clic
           marker.on('click', function () {
-              // Cambiar color
-              if (marker.getElement().classList.contains('guardado')) {
-                  marker.getElement().classList.remove('guardado');
-                  // Eliminar la ubicación del arreglo de guardados
-                  ubicacionesGuardadas = ubicacionesGuardadas.filter(nombre => nombre !== ubicacion.nombre);
-              } else {
-                  marker.getElement().classList.add('guardado');
-                  // Agregar la ubicación al arreglo de guardados
-                  ubicacionesGuardadas.push(ubicacion.nombre);
-              }
-
-              // Actualizar el localStorage
-              localStorage.setItem('guardados', ubicacionesGuardadas.join(','));
-
+              toggleGuardado(ubicacion.nombre, marker);
           });
       });
 
@@ -81,11 +68,150 @@ async function crearBalizas() {
   }
 }
 
-crearBalizas().then(() => {
-  setTimeout(() => {
-      console.log('Nombres de ubicaciones:', nombresUbicaciones);
-  }, 2000);
-});
+function toggleGuardado(nombre, marker) {
+  // Cambiar color
+  if (marker.getElement().classList.contains('guardado')) {
+      marker.getElement().classList.remove('guardado');
+      // Eliminar la ubicación del arreglo de guardados
+      ubicacionesGuardadas = ubicacionesGuardadas.filter(n => n !== nombre);
+  } else {
+      marker.getElement().classList.add('guardado');
+      // Agregar la ubicación al arreglo de guardados
+      ubicacionesGuardadas.push(nombre);
+  }
+
+  // Actualizar el localStorage
+  localStorage.setItem('guardados', ubicacionesGuardadas.join(','));
+
+  // Llamar a la función crearCard con el nombre de la ubicación
+  crearCard();
+}
+
+function crearCard() {
+  // Obtener el contenedor de las tarjetas
+  const ubicacionesCardsWrapper = document.querySelector('.mySwiper2 .ubicacionesCards');
+
+  // Limpiar el contenedor antes de volver a crear las tarjetas
+  ubicacionesCardsWrapper.innerHTML = '';
+
+  // Iterar sobre las ubicaciones guardadas y crear las tarjetas
+  for (const nombre of ubicacionesGuardadas) {
+      const newSlide = document.createElement('div');
+      newSlide.className = 'swiper-slide';
+      newSlide.setAttribute('data-nombre', nombre);
+
+      newSlide.innerHTML = `
+      <div class="container">
+      <div class="card">
+      <div class="row">
+          <div class="col-9 left">
+              <div class="row top">
+                  <div class="col">${nombre}</div>
+                  <!-- Fecha actual -->
+                  <div class="col"><span id="fecha"></span></div>
+                  <!-- Hora actualizada cada 15 segs -->
+                  <div class="col"><span id="hora"></span></div>
+              </div>
+              <div class="row">
+                  <div class="col-7 temp">-4&deg;</div>
+                  <div class="col-5 time"><p>11:00</p><h2><b>Sábado</b></h2><p>Nublado.</p></div>
+              </div>
+              <div class="row prec ">
+                <div class="col-12"><i class="fa-solid fa-wind"></i> 6.1 mph</div>
+                <div class="col-12"><i class="fa-solid fa-droplet"></i> 90%</div>
+              </div>
+              <div class="row bottom">
+                  <div class="col"><hr></div>
+                  <div class="col border">
+                      <div class="row">Sab</div>
+                      <div class="row"><b>-4&deg;</b></div>
+                  </div>
+                  <div class="col">
+                      <div class="row">Dom</div>
+                      <div class="row"><b>-4&deg;</b></div>
+                  </div>
+                  <div class="col">
+                      <div class="row">Lun</div>
+                      <div class="row"><b>-5&deg;</b></div>
+                  </div>
+                  <div class="col">
+                      <div class="row">Mar</div>
+                      <div class="row"><b>-10&deg;</b></div>
+                  </div>
+                  <div class="col">
+                      <div class="row">Mie</div>
+                      <div class="row"><b>-4&deg;</b></div>
+                  </div>
+                  <div class="col">
+                      <div class="row">Jue</div>
+                      <div class="row"><b>-2&deg;</b></div>
+                  </div>
+                  <div class="col">
+                      <div class="row">Vie</div>
+                      <div class="row"><b>0&deg;</b></div>
+                  </div>
+                  <div class="col"><hr></div>
+              </div>
+          </div>
+          <div class="col-3 right">
+              <div class="row top" style="margin-right: 10.5em;">Gráficas</div>
+                <div class="row">
+
+                  <div>
+                    <div class="top text-center">
+
+                      <div class="" >
+                        <label for="desde">Desde</label>
+                        <input type="date" name="" id="desde">
+                      </div>
+
+                      
+                      <label for="hasta">Hasta</label>
+                      <input type="date" name="" id="hasta">
+                    </div>
+                    <canvas id="myChart"></canvas>
+                  </div>
+
+                  <div class="bottom da text-center">
+                    <span class="top">Dias anteriores</span>
+                      <div class="col border">
+                        <div class="row">Sab</div>
+                        <div class="row"><b>-4&deg;</b></div>
+                      </div>
+                      <div class="col border">
+                        <div class="row">Dom</div>
+                        <div class="row"><b>3&deg;</b></div>
+                      </div>
+                      <div class="col border">
+                        <div class="row">Lun</div>
+                        <div class="row"><b>-3&deg;</b></div>
+                      </div>
+                      <div class="col border">
+                        <div class="row">Mar</div>
+                        <div class="row"><b>1&deg;</b></div>
+                      </div>
+                      <div class="col border">
+                        <div class="row">Mie</div>
+                        <div class="row"><b>2&deg;</b></div>
+                      </div>
+                  </div>
+                  
+                  <script src="js/grafica.js"></script>
+                </div>
+          </div>
+      </div>
+  </div>
+      </div>
+    `;
+
+      ubicacionesCardsWrapper.appendChild(newSlide);
+  }
+
+  // Actualizar el swiper
+  swiper2.update();
+}
+
+crearBalizas();
 
 
 
