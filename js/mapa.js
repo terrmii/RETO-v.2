@@ -131,9 +131,7 @@ function crearCard(nombre) {
                   <div class="col-9 left">
                       <div class="row top">
                           <div class="col">${nombre}</div>
-                          <!-- Fecha actual -->
-                          <div class="col"><span id="fecha"></span></div>
-                          <!-- Hora actualizada cada 15 segs -->
+                          <div class="col"><span id="fecha">${fechaHoy}</span></div>
                           <div class="col"><span id="hora"></span></div>
                       </div>
                       <div class="row">
@@ -141,7 +139,7 @@ function crearCard(nombre) {
                           <div class="col-5 time"><p>11:00</p><h2><b>Sábado</b></h2><p>Nublado.</p></div>
                       </div>
                       <div class="row prec">
-                        <div class="col-12"><i class="fa-solid fa-wind"></i> ${data[0]['viento']} mph</div>
+                        <div class="col-12"><i class="fa-solid fa-wind"></i> ${data[0]['viento']} KM/h</div>
                         <div class="col-12"><i class="fa-solid fa-droplet"></i> ${data[0]['humedad']}%</div>
                       </div>
                       <div class="row bottom">
@@ -184,7 +182,7 @@ function crearCard(nombre) {
                           <div>
                             <div class="top text-center">
         
-                              <div class="" >
+                              <div>
                                 <label for="desde">Desde</label>
                                 <input type="date" name="" id="desde">
                               </div>
@@ -242,8 +240,48 @@ function crearCard(nombre) {
   });
 }
 
+function obtenerHoraActual() {
+    // Obtiene la fecha y hora actual
+    const ahora = new Date();
 
+    // Obtiene las horas y los minutos
+    const horas = ahora.getHours();
+    const minutos = ahora.getMinutes();
 
+    // Formatea las horas y los minutos con ceros a la izquierda si es necesario
+    const horasFormateadas = horas < 10 ? '0' + horas : horas;
+    const minutosFormateados = minutos < 10 ? '0' + minutos : minutos;
+
+    // Devuelve la hora en formato HH:MM
+    return `${horasFormateadas}:${minutosFormateados}`;
+}
+
+var horaActual;
+
+function actualizarHora() {
+    horaActual = obtenerHoraActual();
+    
+    // Actualiza el contenido del elemento con id="hora"
+    document.getElementById("hora").innerText = horaActual;
+}
+
+actualizarHora();
+
+setInterval(actualizarHora, 15000);
+
+function obtenerFechaActual() {
+    const ahora = new Date();
+    const dia = ahora.getDate();
+    const mes = ahora.getMonth() + 1;
+    const anio = ahora.getFullYear();
+
+    const diaFormateado = dia < 10 ? '0' + dia : dia;
+    const mesFormateado = mes < 10 ? '0' + mes : mes;
+
+    return `${anio}-${mesFormateado}-${diaFormateado}`;
+}
+
+var fechaHoy = obtenerFechaActual();
 
 
 
