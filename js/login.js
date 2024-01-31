@@ -113,7 +113,6 @@ const laravelApi = 'http://localhost:81';
                             created_at: data.created_at,
                             updated_at: data.updated_at
                         };
-                        console.log("Usuario autenticado:", usuario);
                     }
     
                 } catch (error) {
