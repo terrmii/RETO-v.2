@@ -81,6 +81,8 @@ function toggleGuardado(nombre, marker) {
         marker.getElement().classList.remove('guardado');
         // Eliminar la ubicación del arreglo de guardados
         ubicacionesGuardadas = ubicacionesGuardadas.filter(n => n !== nombre);
+         // Eliminar la tarjeta correspondiente
+         eliminarCard(nombre);
     } else {
         marker.getElement().classList.add('guardado');
         // Agregar la ubicación al arreglo de guardados
@@ -107,6 +109,7 @@ function crearCard(nombre) {
 
   ina = 1;
 
+
   fetch(laravelApi + "/api/obtener-datos-nombre/" + nombre, {
       method: "GET",
       headers: {
@@ -115,8 +118,6 @@ function crearCard(nombre) {
   })
   .then(response => response.json())
   .then(data => {
-      console.log('Datos de las ubicaciones: ', data);
-
       // Verificar si hay ubicaciones guardadas
       if (ubicacionesGuardadas.length > 0) {
           // Iterar sobre las ubicaciones guardadas y crear las tarjetas
@@ -130,13 +131,12 @@ function crearCard(nombre) {
               <div class="row">
                   <div class="col-9 left">
                       <div class="row top">
-                          <div class="col">${nombre}</div>
+                          <div class="col fw-bold">${nombre}</div>
                           <div class="col"><span id="fecha">${fechaHoy}</span></div>
-                          <div class="col"><span id="hora"></span></div>
                       </div>
                       <div class="row">
                           <div class="col-7 temp">${data[0]['temperatura_fake']}&deg;</div>
-                          <div class="col-5 time"><p>11:00</p><h2><b>Sábado</b></h2><p>Nublado.</p></div>
+                          <div class="col-5 time"><p>${obtenerHoraActual()}:00</p><h2><b>Sábado</b></h2><p>Nublado.</p></div>
                       </div>
                       <div class="row prec">
                         <div class="col-12"><i class="fa-solid fa-wind"></i> ${data[0]['viento']} KM/h</div>
@@ -240,6 +240,16 @@ function crearCard(nombre) {
   });
 }
 
+function eliminarCard(nombre) {
+    const ubicacionesCardsWrapper = document.querySelector('.mySwiper2 .ubicacionesCards');
+    const cardToRemove = ubicacionesCardsWrapper.querySelector(`[data-nombre="${nombre}"]`);
+    if (cardToRemove) {
+        ubicacionesCardsWrapper.removeChild(cardToRemove);
+        // Actualizar el swiper después de eliminar la tarjeta
+        swiper2.update();
+    }
+}
+
 function obtenerHoraActual() {
     // Obtiene la fecha y hora actual
     const ahora = new Date();
@@ -250,24 +260,10 @@ function obtenerHoraActual() {
 
     // Formatea las horas y los minutos con ceros a la izquierda si es necesario
     const horasFormateadas = horas < 10 ? '0' + horas : horas;
-    const minutosFormateados = minutos < 10 ? '0' + minutos : minutos;
 
     // Devuelve la hora en formato HH:MM
-    return `${horasFormateadas}:${minutosFormateados}`;
+    return `${horasFormateadas}`;
 }
-
-var horaActual;
-
-function actualizarHora() {
-    horaActual = obtenerHoraActual();
-    
-    // Actualiza el contenido del elemento con id="hora"
-    document.getElementById("hora").innerText = horaActual;
-}
-
-actualizarHora();
-
-setInterval(actualizarHora, 15000);
 
 function obtenerFechaActual() {
     const ahora = new Date();
@@ -278,10 +274,12 @@ function obtenerFechaActual() {
     const diaFormateado = dia < 10 ? '0' + dia : dia;
     const mesFormateado = mes < 10 ? '0' + mes : mes;
 
+
     return `${anio}-${mesFormateado}-${diaFormateado}`;
 }
 
 var fechaHoy = obtenerFechaActual();
+
 
 
 
