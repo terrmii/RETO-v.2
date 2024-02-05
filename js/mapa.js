@@ -136,7 +136,7 @@ function crearCard(nombre) {
                       </div>
                       <div class="row">
                           <div class="col-7 temp">${(data[0]['temperatura_real'])}&deg;</div>
-                          <div class="col-5 time"><p>${obtenerHoraActual()}:00</p><h2><b>Sábado</b></h2><p>Nublado.</p></div>
+                          <div class="col-5 time"><p>${obtenerHoraActual()}:00</p><h2><b>${diaDeLaSemana}</b></h2><p class="descripcion">${data[0]['descripcion']}.</p></div>
                       </div>
                       <div class="row prec">
                         <div class="col-12"><i class="fa-solid fa-wind"></i> ${data[0]['viento']} KM/h</div>
@@ -264,7 +264,7 @@ function eliminarCard(nombre) {
     const cardToRemove = ubicacionesCardsWrapper.querySelector(`[data-nombre="${nombre}"]`);
     if (cardToRemove) {
         ubicacionesCardsWrapper.removeChild(cardToRemove);
-        // Actualizar el swiper después de eliminar la tarjeta
+
         swiper2.update();
     }
 }
@@ -293,6 +293,19 @@ function obtenerFechaActual() {
 
 var fechaHoy = obtenerFechaActual();
 
+function obtenerDiaSemanaEnEspanol() {
+    const diasSemana = [
+      'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'
+    ];
+  
+    const fechaActual = new Date();
+    const diaSemana = fechaActual.getDay();
+  
+    return diasSemana[diaSemana];
+}
+  
+const diaDeLaSemana = obtenerDiaSemanaEnEspanol();
+
 async function actualizarTemperatura(nombre){
     try {
         let respuesta = await fetch(laravelApi + "/api/obtener-temperatura/" + nombre, {
@@ -312,4 +325,7 @@ async function actualizarTemperatura(nombre){
     }
 
 }
+
+
+
 

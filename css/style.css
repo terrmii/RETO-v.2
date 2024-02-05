@@ -268,3 +268,7 @@ canvas{
 .da .border:hover{
   border: 1px solid black !important;
 }
+
+.descripcion::first-letter{
+  text-transform: capitalize;
+}
