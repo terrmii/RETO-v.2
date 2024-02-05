@@ -223,6 +223,10 @@ function crearCard(nombre) {
                   </div>
               </div>
           </div>
+          <div class="dnd">
+            <i class="fa-solid fa-wind" id="viento" draggable="true"></i>
+            <i class="fa-solid fa-droplet" id="gota" draggable="true"></i>
+          </div>
               </div>
             `;
 
