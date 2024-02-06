@@ -153,9 +153,10 @@ function drop(ev) {
             </div>
         </div>
         <div class="dnd" id="dnd" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <i class="fa-solid fa-wind" id="viento" draggable="true" ondragstart="drag(event)" ondragend="dragend()">
-            </i> 
-            <div class="prueba" id="prueba" draggable="true" ondragstart="drag(event)" ondragend="dragend()">
+            <div class="viento" id="prueba" draggable="true" ondragstart="drag(event)" ondragend="dragend()">
+                <i class="fa-solid fa-wind"></i>${data[0]['viento']} KM/h
+            </div>
+            <div class="humedad" id="prueba" draggable="true" ondragstart="drag(event)" ondragend="dragend()">
                 <i class="fa-solid fa-droplet"></i>${data[0]['humedad']}%
             </div>
         </div>
