@@ -74,6 +74,10 @@ body{
   color: white;
 }
 
+.titulosCard{
+  font-size: large !important;
+}
+
 @media (max-width: 991px) {
     .navbar .btn {
       font-size: 0.8rem;
@@ -271,4 +275,32 @@ canvas{
 
 .descripcion::first-letter{
   text-transform: capitalize;
+}
+
+#dnd {
+  transition: border 0.3s; /* Agregamos transición para suavizar el cambio de color */
+}
+#dndHumedad, #dndViento{
+  display: none;
+}
+.viento, .humedad{
+  background-color: black;
+  width: fit-content;
+  border-radius: 50em;
+  padding: 1em;
+  color: white;
+  font-size: 1em;
+  text-align: center;
+  display: flex;
+  position: absolute;
+}
+.viento{
+  margin-top: 80px;
+}
+.humedad{  
+  min-width: 3em;
+}
+.prec{
+  margin-bottom: 10px;
+  width: fit-content;
 }

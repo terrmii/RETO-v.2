@@ -19,6 +19,87 @@ let pyrenees = [];
 let southernMountain = [];
 let vitoriaGasteiz = [];
 
+var clasesClonadas = [];
+
+function allowDrop(ev) {
+    var data = ev.dataTransfer.getData("text");
+
+    if (clasesClonadas.includes(data)) {
+        ev.preventDefault();
+    } else {
+        ev.preventDefault();
+        ev.dataTransfer.dropEffect = "copy";
+    }
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+
+    document.getElementById("dnd").style.borderColor = "black";
+    document.getElementById("dnd").style.border = "1px dashed";
+}
+
+function dragend() {
+
+    document.getElementById("dnd").style.borderColor = "black";
+    document.getElementById("dnd").style.border = "0px dashed";
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+
+    document.getElementById("dnd").style.borderColor = "black";
+    
+
+    if (clasesClonadas.includes(data)) {
+        return;
+    }
+
+    clasesClonadas.push(data);
+
+    var draggedElement = document.getElementById(data);
+    
+    var clonedElement = draggedElement.cloneNode(true);
+    clonedElement.id = "cloned-" + data; 
+    
+    clonedElement.classList.remove("viento");
+    clonedElement.classList.remove("humedad");
+    
+    document.getElementById("dnd").appendChild(clonedElement);
+
+    clonedElement.addEventListener("dragstart", function(event) {
+
+        event.target.parentNode.removeChild(event.target);
+
+        var claseId = event.target.id.substring("cloned-".length);
+        clasesClonadas = clasesClonadas.filter(function(clase) {
+            return clase !== claseId;
+        });
+
+        // Verificar si todos los elementos han sido eliminados
+        if (clasesClonadas.length === 0) {
+            // Si no hay elementos clonados, mostrar el texto "Arrastre aqui los parametros que quiera visualizar"
+            document.querySelector(".drag h6").style.display = "block";
+        }
+    });
+    
+    var spans = document.getElementById("dnd").querySelectorAll("span");
+
+    for (var i = 0; i < spans.length; i++) {
+        if (spans[i].parentNode.id === "dnd") {
+            spans[i].style.display = "none";
+        } else {
+            spans[i].style.display = "inline-block";
+        }
+    }
+    
+    // Ocultar el texto "Arrastre aqui los parametros que quiera visualizar"
+    document.querySelector(".drag h6").style.display = "none";
+}
+
+
+
 var ubicacionesGuardadas;
 
 var ubicacionesGuardadas;
@@ -128,105 +209,109 @@ function crearCard(nombre) {
               newSlide.innerHTML = `
               <div class="container">
               <div class="card">
-              <div class="row">
+                <div class="row">
                   <div class="col-9 left">
-                      <div class="row top">
-                          <div class="col fw-bold">${nombre}</div>
-                          <div class="col"><span id="fecha">${fechaHoy}</span></div>
-                      </div>
-                      <div class="row">
-                          <div class="col-7 temp">${(data[0]['temperatura_real'])}&deg;</div>
-                          <div class="col-5 time"><p>${obtenerHoraActual()}:00</p><h2><b>${diaDeLaSemana}</b></h2><p class="descripcion">${data[0]['descripcion']}.</p></div>
-                      </div>
-                      <div class="row prec">
-                        <div class="col-12"><i class="fa-solid fa-wind"></i> ${data[0]['viento']} KM/h</div>
-                        <div class="col-12"><i class="fa-solid fa-droplet"></i> ${data[0]['humedad']}%</div>
-                      </div>
-                      <div class="row bottom">
-                          <div class="col"><hr></div>
-                          <div class="col border">
-                              <div class="row">Sab</div>
-                              <div class="row"><b>-4&deg;</b></div>
-                          </div>
-                          <div class="col">
-                              <div class="row">Dom</div>
-                              <div class="row"><b>-4&deg;</b></div>
-                          </div>
-                          <div class="col">
-                              <div class="row">Lun</div>
-                              <div class="row"><b>-5&deg;</b></div>
-                          </div>
-                          <div class="col">
-                              <div class="row">Mar</div>
-                              <div class="row"><b>-10&deg;</b></div>
-                          </div>
-                          <div class="col">
-                              <div class="row">Mie</div>
-                              <div class="row"><b>-4&deg;</b></div>
-                          </div>
-                          <div class="col">
-                              <div class="row">Jue</div>
-                              <div class="row"><b>-2&deg;</b></div>
-                          </div>
-                          <div class="col">
-                              <div class="row">Vie</div>
-                              <div class="row"><b>0&deg;</b></div>
-                          </div>
-                          <div class="col"><hr></div>
-                      </div>
-                  </div>
-                  <div class="col-3 right">
-                      <div class="row top" style="margin-right: 10.5em;">Gráficas</div>
+                      <div class="dnd">
+                        <div class="viento" id="prueba" draggable="true" ondragstart="${drag(event)}" ondragend="${dragend()}">
+                            <i class="fa-solid fa-wind"></i> <span id="dndViento">${data[0]['viento']} KM/h</span>
+                        </div>
+                        <br>
+                        <div class="humedad" id="prueba2" draggable="true" ondragstart="${drag(event)}" ondragend="${dragend()}">
+                            <i class="fa-solid fa-droplet"></i> <span id="dndHumedad">${data[0]['humedad']}%</span>
+                        </div>
+                    </div>
+                        <div class="row top titulosCard">
+                            <div class="col fw-bold">${nombre}</div>
+                            <div class="col"><span id="fecha">${fechaHoy}</span></div>
+                        </div>
                         <div class="row">
-        
-                          <div>
-                            <div class="top text-center">
-        
-                              <div>
-                                <label for="desde">Desde</label>
-                                <input type="date" name="" id="desde">
-                              </div>
-        
-                              
-                              <label for="hasta">Hasta</label>
-                              <input type="date" name="" id="hasta">
-                            </div>
-                            <canvas id="myChart"></canvas>
-                          </div>
-        
-                          <div class="bottom da text-center">
-                            <span class="top">Dias anteriores</span>
-                              <div class="col border">
+                            <div class="col-7 temp">${(data[0]['temperatura_real'])}&deg;</div>
+                            <div class="col-5 time"><p>${obtenerHoraActual()}:00</p><h2><b>${diaDeLaSemana}</b></h2><p class="descripcion">${data[0]['descripcion']}.</p></div>
+                        </div>
+                        <div class="row prec" id="dnd" ondrop="${drop(event)}" ondragover="${allowDrop(event)}">
+                          <div class="drag"><h6>Arrastre aqui los parametros que quiera visualizar.</h6></div>
+                        </div>
+                        <div class="row bottom">
+                            <div class="col"><hr></div>
+                            <div class="col border">
                                 <div class="row">Sab</div>
                                 <div class="row"><b>-4&deg;</b></div>
-                              </div>
-                              <div class="col border">
+                            </div>
+                            <div class="col">
                                 <div class="row">Dom</div>
-                                <div class="row"><b>3&deg;</b></div>
-                              </div>
-                              <div class="col border">
+                                <div class="row"><b>-4&deg;</b></div>
+                            </div>
+                            <div class="col">
                                 <div class="row">Lun</div>
-                                <div class="row"><b>-3&deg;</b></div>
-                              </div>
-                              <div class="col border">
+                                <div class="row"><b>-5&deg;</b></div>
+                            </div>
+                            <div class="col">
                                 <div class="row">Mar</div>
-                                <div class="row"><b>1&deg;</b></div>
-                              </div>
-                              <div class="col border">
+                                <div class="row"><b>-10&deg;</b></div>
+                            </div>
+                            <div class="col">
                                 <div class="row">Mie</div>
-                                <div class="row"><b>2&deg;</b></div>
-                              </div>
-                          </div>
-                          
-                          <script src="js/grafica.js"></script>
+                                <div class="row"><b>-4&deg;</b></div>
+                            </div>
+                            <div class="col">
+                                <div class="row">Jue</div>
+                                <div class="row"><b>-2&deg;</b></div>
+                            </div>
+                            <div class="col">
+                                <div class="row">Vie</div>
+                                <div class="row"><b>0&deg;</b></div>
+                            </div>
+                            <div class="col"><hr></div>
                         </div>
-                  </div>
-              </div>
-          </div>
-          <div class="dnd">
-            <i class="fa-solid fa-wind" id="viento" draggable="true"></i>
-            <i class="fa-solid fa-droplet" id="gota" draggable="true"></i>
-          </div>
+                    </div>
+                    <div class="col-3 right">
+                        <div class="row top" style="margin-right: 10.5em;">Gráficas</div>
+                          <div class="row">
+          
+                            <div>
+                              <div class="top text-center">
+          
+                                <div>
+                                  <label for="desde">Desde</label>
+                                  <input type="date" name="" id="desde">
+                                </div>
+          
+                                
+                                <label for="hasta">Hasta</label>
+                                <input type="date" name="" id="hasta">
+                              </div>
+                              <canvas id="myChart"></canvas>
+                            </div>
+          
+                            <div class="bottom da text-center">
+                              <span class="top">Dias anteriores</span>
+                                <div class="col border">
+                                  <div class="row">Sab</div>
+                                  <div class="row"><b>-4&deg;</b></div>
+                                </div>
+                                <div class="col border">
+                                  <div class="row">Dom</div>
+                                  <div class="row"><b>3&deg;</b></div>
+                                </div>
+                                <div class="col border">
+                                  <div class="row">Lun</div>
+                                  <div class="row"><b>-3&deg;</b></div>
+                                </div>
+                                <div class="col border">
+                                  <div class="row">Mar</div>
+                                  <div class="row"><b>1&deg;</b></div>
+                                </div>
+                                <div class="col border">
+                                  <div class="row">Mie</div>
+                                  <div class="row"><b>2&deg;</b></div>
+                                </div>
+                            </div>
+                            
+                            <script src="js/grafica.js"></script>
+                          </div>
+                        </div>
+                    </div>
+                </div>
               </div>
             `;
 
@@ -325,7 +410,7 @@ async function actualizarTemperatura(nombre){
         return a[0]["temperatura_fake"]
 
     } catch (error) {
-        console.log(error);
+
     }
 
 }

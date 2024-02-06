@@ -10,66 +10,140 @@
 </head>
 <style>
     #dnd {
-      border: 1px solid black;
-      transition: border-color 0.3s; /* Agregamos transición para suavizar el cambio de color */
+      transition: border 0.3s; /* Agregamos transición para suavizar el cambio de color */
     }
-    #dndTxt{
-        display: none;
+    #dndHumedad, #dndViento{
+      display: none;
+    }
+    .viento, .humedad{
+      background-color: black;
+      width: fit-content;
+      border-radius: 50em;
+      padding: 1em;
+      color: white;
+      font-size: 1em;
+      text-align: center;
+      display: flex;
+      position: absolute;
+    }
+    .viento{
+      margin-top: 80px;
+    }
+    .humedad{  
+      min-width: 3em;
+    }
+    .prec{
+      margin-bottom: 10px;
+      width: fit-content;
     }
 </style>
 <script>
-    function allowDrop(ev) {
-    ev.preventDefault();
-    }
+  var clasesClonadas = [];
 
-    function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-    // Cambiamos el color del borde solo durante el arrastre
-    document.getElementById("dnd").style.borderColor = "red";
-    }
+  function allowDrop(ev) {
+      var data = ev.dataTransfer.getData("text");
 
-    function dragend() {
-    // Restauramos el color del borde al finalizar el arrastre
-    document.getElementById("dnd").style.borderColor = "black";
-}
+      if (clasesClonadas.includes(data)) {
+          ev.preventDefault();
+      } else {
+          ev.preventDefault();
+          ev.dataTransfer.dropEffect = "copy";
+      }
+  }
 
-function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            // Restauramos el color del borde al soltar el elemento
-            document.getElementById("dnd").style.borderColor = "black";
+  function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
 
-            // Obtenemos el elemento movido
-            var draggedElement = document.getElementById(data);
-            
-            // Creamos un nuevo elemento clonado para insertar en el área de "drag and drop"
-            var clonedElement = draggedElement.cloneNode(true);
-            clonedElement.id = "cloned-" + data;  // Cambiamos el ID para evitar duplicados
-            
-            // Insertamos el elemento clonado en el área de "drag and drop"
-            document.getElementById("dnd").appendChild(clonedElement);
+      document.getElementById("dnd").style.borderColor = "black";
+      document.getElementById("dnd").style.border = "1px dashed";
+  }
 
-            // Muestra el texto oculto después de soltar el elemento
-            document.getElementById("dndTxt").style.display = "block";
-        }
+  function dragend() {
+
+      document.getElementById("dnd").style.borderColor = "black";
+      document.getElementById("dnd").style.border = "0px dashed";
+  }
+
+  function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+
+      document.getElementById("dnd").style.borderColor = "black";
+      
+
+      if (clasesClonadas.includes(data)) {
+          return;
+      }
+
+      clasesClonadas.push(data);
+
+      var draggedElement = document.getElementById(data);
+      
+      var clonedElement = draggedElement.cloneNode(true);
+      clonedElement.id = "cloned-" + data; 
+      
+      clonedElement.classList.remove("viento");
+      clonedElement.classList.remove("humedad");
+      
+      document.getElementById("dnd").appendChild(clonedElement);
+
+      clonedElement.addEventListener("dragstart", function(event) {
+
+          event.target.parentNode.removeChild(event.target);
+
+          var claseId = event.target.id.substring("cloned-".length);
+          clasesClonadas = clasesClonadas.filter(function(clase) {
+              return clase !== claseId;
+          });
+
+          // Verificar si todos los elementos han sido eliminados
+          if (clasesClonadas.length === 0) {
+              // Si no hay elementos clonados, mostrar el texto "Arrastre aqui los parametros que quiera visualizar"
+              document.querySelector(".drag h6").style.display = "block";
+          }
+      });
+      
+      var spans = document.getElementById("dnd").querySelectorAll("span");
+
+      for (var i = 0; i < spans.length; i++) {
+          if (spans[i].parentNode.id === "dnd") {
+              spans[i].style.display = "none";
+          } else {
+              spans[i].style.display = "inline-block";
+          }
+      }
+      
+      // Ocultar el texto "Arrastre aqui los parametros que quiera visualizar"
+      document.querySelector(".drag h6").style.display = "none";
+  }
 </script>
+
+
 
 <body>
     <div class="container">
-        <div class="card">
+      <div class="card">
         <div class="row">
-            <div class="col-9 left">
-                <div class="row top">
+          <div class="col-9 left">
+              <div class="dnd">
+                <div class="viento" id="prueba" draggable="true" ondragstart="drag(event)" ondragend="dragend()">
+                    <i class="fa-solid fa-wind"></i> <span id="dndViento">${data[0]['viento']} KM/h</span>
+                </div>
+                <br>
+                <div class="humedad" id="prueba2" draggable="true" ondragstart="drag(event)" ondragend="dragend()">
+                    <i class="fa-solid fa-droplet"></i> <span id="dndHumedad">${data[0]['humedad']}%</span>
+                </div>
+            </div>
+                <div class="row top titulosCard">
                     <div class="col fw-bold">${nombre}</div>
                     <div class="col"><span id="fecha">${fechaHoy}</span></div>
                 </div>
                 <div class="row">
-                    <div class="col-7 temp">11&deg;</div>
+                    <div class="col-7 temp">&deg;</div>
                     <div class="col-5 time"><p>${obtenerHoraActual()}:00</p><h2><b>${diaDeLaSemana}</b></h2><p class="descripcion">${data[0]['descripcion']}.</p></div>
                 </div>
                 <div class="row prec" id="dnd" ondrop="drop(event)" ondragover="allowDrop(event)">
-                  <div class="col-12"><i class="fa-solid fa-wind"></i> ${data[0]['viento']} KM/h</div>
-                  <div class="col-12"><i class="fa-solid fa-droplet"></i> ${data[0]['humedad']}%</div>
+                  <div class="drag"><h6>Arrastre aqui los parametros que quiera visualizar.</h6></div>
                 </div>
                 <div class="row bottom">
                     <div class="col"><hr></div>
@@ -152,14 +226,6 @@ function drop(ev) {
                 </div>
             </div>
         </div>
-        <div class="dnd" id="dnd" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="viento" id="prueba" draggable="true" ondragstart="drag(event)" ondragend="dragend()">
-                <i class="fa-solid fa-wind"></i>${data[0]['viento']} KM/h
-            </div>
-            <div class="humedad" id="prueba" draggable="true" ondragstart="drag(event)" ondragend="dragend()">
-                <i class="fa-solid fa-droplet"></i>${data[0]['humedad']}%
-            </div>
-        </div>
-    </div>
+      </div>
 </body> 
 </html>
