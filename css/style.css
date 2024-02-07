@@ -278,7 +278,7 @@ canvas{
 }
 
 #dnd {
-  transition: border 0.3s; /* Agregamos transición para suavizar el cambio de color */
+  transition: border 0.3s; 
 }
 #dndHumedad, #dndViento{
   display: none;
@@ -303,4 +303,25 @@ canvas{
 .prec{
   margin-bottom: 10px;
   width: fit-content;
+}
+
+/* MODAL INICIO SESION/REGISTER */
+.modal{
+  font-family: 'Work Sans', sans-serif;
+}
+.iconUsuario{
+  margin-bottom: 1.4em !important;
+}
+
+
+.modal-header{
+  border-bottom: 0px !important;
+}
+
+.modal .form-group{
+  margin-block: 15px !important;
+}
+
+.modal-footer{
+  background-color: rgb(242, 242, 242) !important;
 }

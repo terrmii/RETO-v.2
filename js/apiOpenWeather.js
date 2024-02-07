@@ -1,6 +1,6 @@
 const apiOpenWeather = 'https://api.openweathermap.org/data/2.5/weather?q=';
 const tokenApiOpenWeather = '253682c0bd759acfb4255d4aa08c3dd7'
-const laravelApiTiempo = 'http://localhost:82';
+const laravelApiTiempo = 'http://10.10.17.96:82';
 
 var ciudades = ['donostia', 'irun', 'hondarribia', 'errenteria']
 

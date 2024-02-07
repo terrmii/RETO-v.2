@@ -59,6 +59,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+    // Obtén el elemento del enlace
+    var goToSecondSlideLink = document.getElementById('goToSecondSlide');
+
+    // Agrega un manejador de eventos de clic al enlace
+    goToSecondSlideLink.addEventListener('click', function (event) {
+      // Previene el comportamiento predeterminado del enlace
+      event.preventDefault();
+  
+      // Navega al segundo slide del swiper2 (slider horizontal)
+      swiper.slideTo(1); // El índice comienza desde 0
+    });
+
   desactivarSlider();
 });
 

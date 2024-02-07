@@ -1,4 +1,4 @@
-const laravelApi = 'http://localhost:81';
+const laravelApi = 'http://10.10.17.96:81';
 
         async function login(correo, contrasena) {
 
