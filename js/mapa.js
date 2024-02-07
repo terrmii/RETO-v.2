@@ -212,11 +212,11 @@ function crearCard(nombre) {
                 <div class="row">
                   <div class="col-9 left">
                       <div class="dnd">
-                        <div class="viento" id="prueba" draggable="true" ondragstart="${drag(event)}" ondragend="${dragend()}">
+                        <div class="viento" id="prueba" draggable="true" ondragstart="drag(event)" ondragend="dragend()">
                             <i class="fa-solid fa-wind"></i> <span id="dndViento">${data[0]['viento']} KM/h</span>
                         </div>
                         <br>
-                        <div class="humedad" id="prueba2" draggable="true" ondragstart="${drag(event)}" ondragend="${dragend()}">
+                        <div class="humedad" id="prueba2" draggable="true" ondragstart="drag(event)" ondragend="dragend()">
                             <i class="fa-solid fa-droplet"></i> <span id="dndHumedad">${data[0]['humedad']}%</span>
                         </div>
                     </div>
@@ -228,7 +228,7 @@ function crearCard(nombre) {
                             <div class="col-7 temp">${(data[0]['temperatura_real'])}&deg;</div>
                             <div class="col-5 time"><p>${obtenerHoraActual()}:00</p><h2><b>${diaDeLaSemana}</b></h2><p class="descripcion">${data[0]['descripcion']}.</p></div>
                         </div>
-                        <div class="row prec" id="dnd" ondrop="${drop(event)}" ondragover="${allowDrop(event)}">
+                        <div class="row prec" id="dnd" ondrop="drop(event)" ondragover="allowDrop(event)">
                           <div class="drag"><h6>Arrastre aqui los parametros que quiera visualizar.</h6></div>
                         </div>
                         <div class="row bottom">

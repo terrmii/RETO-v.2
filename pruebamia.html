@@ -139,7 +139,7 @@
                     <div class="col"><span id="fecha">${fechaHoy}</span></div>
                 </div>
                 <div class="row">
-                    <div class="col-7 temp">&deg;</div>
+                    <div class="col-7 temp">${(data[0]['temperatura_real'])}&deg;</div>
                     <div class="col-5 time"><p>${obtenerHoraActual()}:00</p><h2><b>${diaDeLaSemana}</b></h2><p class="descripcion">${data[0]['descripcion']}.</p></div>
                 </div>
                 <div class="row prec" id="dnd" ondrop="drop(event)" ondragover="allowDrop(event)">
