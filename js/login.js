@@ -1,9 +1,7 @@
-const laravelApi = 'http://10.10.17.96:81';
-
         async function login(correo, contrasena) {
 
             try {
-                let respuesta = await fetch(laravelApi + "/api/auth/login", {
+                let respuesta = await fetch(urlActual + "/api/auth/login", {
                     method: "POST",
                     body: JSON.stringify({
                         email: correo,
@@ -50,7 +48,7 @@ const laravelApi = 'http://10.10.17.96:81';
         async function register(nombre, correo, contrasena) {
 
             try {
-                let respuesta = await fetch(laravelApi + "/api/auth/signup", {
+                let respuesta = await fetch(urlActual + "/api/auth/signup", {
                     method: "POST",
                     body: JSON.stringify({
                         name: nombre,
@@ -84,7 +82,7 @@ const laravelApi = 'http://10.10.17.96:81';
                 var token = tokenEntero[0];
                 
                 try {
-                    let respuesta = await fetch(laravelApi + "/api/auth/user", {
+                    let respuesta = await fetch(urlActual + "/api/auth/user", {
                         method: "GET",
                         headers: {
                             "Content-type": "application/json; charset=UTF-8",
@@ -133,7 +131,7 @@ const laravelApi = 'http://10.10.17.96:81';
         var token = tokenEntero[0];
 
             try {
-                let respuesta = await fetch(laravelApi + "/api/auth/logout", {
+                let respuesta = await fetch(urlActual + "/api/auth/logout", {
                     headers: {
                         "Content-type": "application/json; charset=UTF-8",
                         'X-Requested-With': 'XMLHttpRequest',

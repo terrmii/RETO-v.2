@@ -1,4 +1,7 @@
 // Mapa
+
+let urlActual = 'http://'+ (new URL(window.location.origin)).hostname + ':81';
+
 var map = L.map('map').setView([43.1924,-2.0850], 10);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -106,7 +109,7 @@ var ubicacionesGuardadas;
 
 async function crearBalizas() {
     try {
-        const response = await fetch(`${laravelApi}/api/obtener-ubicaciones`, {
+        const response = await fetch(`${urlActual}/api/obtener-ubicaciones`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
@@ -191,7 +194,7 @@ function crearCard(nombre) {
   ina = 1;
 
 
-  fetch(laravelApi + "/api/obtener-datos-nombre/" + nombre, {
+  fetch(urlActual + "/api/obtener-datos-nombre/" + nombre, {
       method: "GET",
       headers: {
           "Content-type": "application/json; charset=UTF-8"
@@ -397,7 +400,7 @@ const diaDeLaSemana = obtenerDiaSemanaEnEspanol();
 
 async function actualizarTemperatura(nombre){
     try {
-        let respuesta = await fetch(laravelApi + "/api/obtener-temperatura/" + nombre, {
+        let respuesta = await fetch(urlActual + "/api/obtener-temperatura/" + nombre, {
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
