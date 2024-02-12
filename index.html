@@ -73,12 +73,12 @@
   <div class="navbar py-3" id="navbar">
     <div class="container"> 
       <img src="img/suncloud-high-resolution-logo-white-transparent.png" alt="logo-navbar">
-      <div class="ms-auto d-grid gap-2 d-lg-block">
-        <button type="button" class="btn link-secondary text-white" id="botonInicioSesion" data-bs-toggle="modal" data-bs-target="#inicioSesionModal">
-          Sign in
-        </button>
-        <button type="button" class="btn btn-secondary" id="botonRegistro" data-bs-toggle="modal" data-bs-target="#registroModal">
+      <div class="ms-auto d-flex flex-row-reverse align-items-center">
+        <button type="button" class="btn btn-secondary me-2" id="botonRegistro" data-bs-toggle="modal" data-bs-target="#registroModal">
           Sign up
+        </button>
+        <button type="button" class="btn link-secondary text-white me-2" id="botonInicioSesion" data-bs-toggle="modal" data-bs-target="#inicioSesionModal">
+          Sign in
         </button>
         <!-- Nombre usuario y logout -->
         <span id="mailLogueado" style="display: inline-block;"></span>
@@ -86,6 +86,7 @@
       </div>
     </div>    
   </div>
+  
   <!-- Modal Register -->
   <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
     <div class="modal-dialog">

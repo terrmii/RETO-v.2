@@ -289,48 +289,9 @@ function crearCard(nombre) {
                     <div class="col-3 right">
                         <div class="row top" style="margin-right: 10.5em;">Gráficas</div>
                           <div class="row">
-          
-                            <div>
-                              <div class="top text-center">
-          
-                                <div>
-                                  <label for="desde">Desde</label>
-                                  <input type="date" name="" id="desde">
-                                </div>
-          
-                                
-                                <label for="hasta">Hasta</label>
-                                <input type="date" name="" id="hasta">
-                              </div>
-                              <canvas id="bar-chart" width="800" height="450"></canvas>
-                            </div>
-          
-                            <div class="bottom da text-center">
-                              <span class="top">Dias anteriores</span>
-                                <div class="col border">
-                                  <div class="row">Sab</div>
-                                  <div class="row"><b>-4&deg;</b></div>
-                                </div>
-                                <div class="col border">
-                                  <div class="row">Dom</div>
-                                  <div class="row"><b>3&deg;</b></div>
-                                </div>
-                                <div class="col border">
-                                  <div class="row">Lun</div>
-                                  <div class="row"><b>-3&deg;</b></div>
-                                </div>
-                                <div class="col border">
-                                  <div class="row">Mar</div>
-                                  <div class="row"><b>1&deg;</b></div>
-                                </div>
-                                <div class="col border">
-                                  <div class="row">Mie</div>
-                                  <div class="row"><b>2&deg;</b></div>
-                                </div>
-                            </div>
-                            
-                            <script src="js/grafica.js"></script>
+                              <canvas id="bar-chart"></canvas>
                           </div>
+                        <script src="js/grafica.js"></script>
                         </div>
                     </div>
                 </div>

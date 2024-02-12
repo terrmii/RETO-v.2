@@ -236,7 +236,28 @@ body{
       padding: 2vh 0;
       font-size: 0.52rem;
   }
+  .timely .col{
+      padding: 0 0.5vh;
+  }
+  .temp{
+      font-size: 9vh !important;
+  }
+  .drag h6{
+    font-size: 0.7em !important;
+    margin-top: 3vh !important;
+  }
+  .top{
+    display: flex;
+    flex-direction: column;
+    top: 30vh !important;
+    right: 40vh !important;
+  }
+  canvas{
+    width: 80px !important;
+    height: 30px !important;
+  }
 }
+
 @media(max-width:320px)
 {
   hr{
@@ -291,8 +312,7 @@ body{
   position: absolute;
 }
 .viento{
-  margin-top: 80px;
-}
+  margin-top: 80px;}
 .humedad{  
   min-width: 3em;
 }
@@ -324,7 +344,7 @@ body{
 
 /* Canvas graficas */
 canvas{
-  width: 200px !important;
-  height: 110px !important;
+  width: 320px !important;
+  height: 180px !important;
 }
 

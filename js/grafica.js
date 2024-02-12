@@ -11,10 +11,10 @@ new Chart(document.getElementById("bar-chart"), {
     ]
   },
   options: {
-    legend: { display: true },
+    legend: { display: false },
     title: {
-      display: true,
-      text: 'Temperaturas de la ultima semana'
+      display: false,
+      text: 'Temperatura de la ultima semana'
     }
   }
 });
