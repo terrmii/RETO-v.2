@@ -1,54 +1,20 @@
-// Graficas
-const ctx = document.getElementById('myChart');
-
-Chart.defaults.font.family = 'Work Sans';
-
-new Chart(ctx, {
-  type: 'line',
+new Chart(document.getElementById("bar-chart"), {
+  type: 'bar',
   data: {
-    labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
-    datasets: [{
-      label: 'Precipitación',
-      data: [12, 19, 3, 5, 2, 3],
-      borderWidth: 1,
-    }]
+    labels: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"],
+    datasets: [
+      {
+        label: "Temperatura",
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        data: [12,10,11,15,8,10,14]
+      }
+    ]
   },
   options: {
-    scales: {
-      x: {
-        ticks: {
-          color: 'black',
-          font: {
-            size: 12,
-            family: 'Work Sans',
-            weight: 200  
-          },
-          textShadow: '0 0 4px rgb(3, 3, 3)'
-        }
-      },
-      y: {
-        beginAtZero: true,
-        ticks: {
-          color: 'black',
-          font: {
-            size: 14,
-            family: 'Work Sans',
-            weight: 200  
-          },
-          textShadow: '0 0 4px rgb(3, 3, 3)'
-        }
-      }
-    },
-    plugins: {
-      legend: { 
-        labels: {
-          color: 'black',
-          fontSize: 14,
-          fontFamily: 'Work Sans',
-          textShadow: '0 0 4px rgb(3, 3, 3)',
-          fontStyle: 'light'
-        }
-      } 
+    legend: { display: true },
+    title: {
+      display: true,
+      text: 'Temperaturas de la ultima semana'
     }
   }
-})
+});

@@ -256,10 +256,6 @@ body{
   padding-bottom: 3vh !important;
 }
 
-canvas{
-  width: 90% !important;
-  height: 70% !important;
-}
 
 .da{
   padding: 1em !important;
@@ -325,3 +321,10 @@ canvas{
 .modal-footer{
   background-color: rgb(242, 242, 242) !important;
 }
+
+/* Canvas graficas */
+canvas{
+  width: 200px !important;
+  height: 110px !important;
+}
+

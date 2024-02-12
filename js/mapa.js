@@ -9,6 +9,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 
+
+
+
 var nombresUbicaciones = []; // Variable para almacenar los nombres de ubicaciones
 
 // Zonas
@@ -181,6 +184,8 @@ function toggleGuardado(nombre, marker) {
 
 var ina = 0;
 
+var Forecast;
+
 function crearCard(nombre) {
   // Obtener el contenedor de las tarjetas
   const ubicacionesCardsWrapper = document.querySelector('.mySwiper2 .ubicacionesCards');
@@ -192,6 +197,10 @@ function crearCard(nombre) {
   }
 
   ina = 1;
+
+  regionesEuskalmet(nombre);
+
+
 
 
   fetch(urlActual + "/api/obtener-datos-nombre/" + nombre, {
@@ -209,9 +218,19 @@ function crearCard(nombre) {
               newSlide.className = 'swiper-slide';
               newSlide.setAttribute('data-nombre', nombre);
 
+              if(nombre == "Irun"){
+                Forecast = IrunForecast;
+              }else if(nombre == "Donostia"){
+                Forecast = DonostiaForecast;
+                }else if(nombre == "Errenteria"){
+                Forecast = ErrenteriaForecast;
+                }else{
+                Forecast = "No hay datos disponibles";
+                }
+              
               newSlide.innerHTML = `
               <div class="container">
-              <div class="card">
+              <div class="card tultip" title="${Forecast}">
                 <div class="row">
                   <div class="col-9 left">
                       <div class="dnd">
@@ -283,7 +302,7 @@ function crearCard(nombre) {
                                 <label for="hasta">Hasta</label>
                                 <input type="date" name="" id="hasta">
                               </div>
-                              <canvas id="myChart"></canvas>
+                              <canvas id="bar-chart" width="800" height="450"></canvas>
                             </div>
           
                             <div class="bottom da text-center">
@@ -319,6 +338,36 @@ function crearCard(nombre) {
             `;
 
               ubicacionesCardsWrapper.appendChild(newSlide);
+
+              $(function() {
+                $('.tultip').tooltip();
+              });
+
+              var canvas = newSlide.querySelector('canvas');
+                if (canvas) {
+                    var ctx = canvas.getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                          labels: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"],
+                          datasets: [
+                            {
+                              label: "Temperatura",
+                              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                              data: [12,20,30,24,33,28,20]
+                            }
+                          ]
+                        },
+                        options: {
+                          legend: { display: true },
+                          title: {
+                            display: true,
+                            text: 'Predicted world population (millions) in 2050'
+                          }
+                        }
+                    });
+                }
+                /*...*/
 
               setInterval(async () => {
                 try {

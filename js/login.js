@@ -1,4 +1,5 @@
-        async function login(correo, contrasena) {
+
+       async function login(correo, contrasena) {
 
             try {
                 let respuesta = await fetch(urlActual + "/api/auth/login", {
@@ -82,7 +83,7 @@
                 var token = tokenEntero[0];
                 
                 try {
-                    let respuesta = await fetch(urlActual + "/api/auth/user", {
+                    let respuesta = await fetch('http://'+ (new URL(window.location.origin)).hostname + ':81' + "/api/auth/user", {
                         method: "GET",
                         headers: {
                             "Content-type": "application/json; charset=UTF-8",
@@ -196,7 +197,6 @@
 
 
         function ocultarModal(){
-            console.log("Cerrando el modal");
             var modalInicioSesion = document.getElementById('inicioSesionModal');
 
             var modalRegistro = document.getElementById('registroModal');
@@ -227,7 +227,6 @@
         }
 
         function mostrarModal(){
-            console.log("Abriendo el modal");
             var modalInicioSesion = document.getElementById('inicioSesionModal');
 
             var modalRegistro = document.getElementById('registroModal');
@@ -235,8 +234,6 @@
             mostrar(modalInicioSesion);
 
             mostrar(modalRegistro);
-
-            
             
             // Ocultar el fondo del modal (modal-backdrop)
             var modalFondo = document.getElementsByClassName('modal-backdrop');

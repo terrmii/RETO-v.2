@@ -21,29 +21,75 @@ var fechaHoyEusk = fechaHoyEusk();
 
 var fechaMananaEusk = fechaManana();
 
-async function regionesEuskalmet() {
-  try {
-    const respuesta = await fetch('https://api.euskadi.eus/euskalmet/weather/regions/basque_country/zones/coast_zone/locations/irun/forecast/at/'+fechaHoyEusk+'/for/'+fechaMananaEusk, {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Bearer ' + tokenEuskalmet
-      },
-    });
+var IrunForecast;
 
-    const data = await respuesta.json();
+var DonostiaForecast;
 
-    console.log(data);
+var ErrenteriaForecast;
 
-    console.log('Temperatura:', data["temperature"].value, 'ºC');
-    console.log('Comentario:', data["forecastText"].SPANISH);
+async function regionesEuskalmet(ubicacion) {
 
-   
-  } catch (error) {
-    console.log('Error al ver los datos:', error);
+  switch (ubicacion) {
+    case 'Irun':
+      fetch('https://api.euskadi.eus/euskalmet/weather/regions/basque_country/zones/coast_zone/locations/irun/forecast/at/'+fechaHoyEusk+'/for/'+fechaMananaEusk, {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + tokenEuskalmet
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+
+          IrunForecast = data["forecastText"].SPANISH;
+
+        })
+        .catch(error => {
+          console.log('Error al ver los datos:', error);
+        });
+      break;
+    case 'Donostia':
+      fetch('https://api.euskadi.eus/euskalmet/weather/regions/basque_country/zones/donostialdea/locations/donostia/forecast/at/'+fechaHoyEusk+'/for/'+fechaMananaEusk, {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + tokenEuskalmet
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          
+          DonostiaForecast = data["forecastText"].SPANISH;
+
+        })
+        .catch(error => {
+          console.log('Error al ver los datos:', error);
+        });
+      break;
+    case 'Errenteria':
+      fetch('https://api.euskadi.eus/euskalmet/weather/regions/basque_country/zones/donostialdea/locations/errenteria/forecast/at/'+fechaHoyEusk+'/for/'+fechaMananaEusk, {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + tokenEuskalmet
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          
+          ErrenteriaForecast = data["forecastText"].SPANISH;
+          
+        })
+        .catch(error => {
+          console.log('Error al ver los datos:', error);
+        });
+      break;
+    default:
+      return 'No hay forecast disponible para esta ubicacion: '+ ubicacion;
+      break;
   }
+  
+
+
 }
 
-regionesEuskalmet();
 
 
 
