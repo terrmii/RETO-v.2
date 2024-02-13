@@ -42,7 +42,7 @@
                 }
                 
             } catch (error) {
-                console.error(error);
+                alert("Error al iniciar sesion");
             }
         }
 
@@ -63,12 +63,13 @@
                 });
 
                 let data = await respuesta.json();
-                // console.log(data);
 
                 if([data["message"] == 'Successfully created user!']){
 
                     login(data["mail"], data["password"]);
                     
+                }else{
+                    alert("Error al registrarse");
                 }
 
             } catch (error) {

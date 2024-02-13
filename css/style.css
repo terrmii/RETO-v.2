@@ -282,9 +282,6 @@ body{
   padding: 1em !important;
 }
 
-.da .col{
-  padding: 0.2em;
-}
 
 .da .border:hover{
   border: 1px solid black !important;
@@ -294,9 +291,6 @@ body{
   text-transform: capitalize;
 }
 
-#dnd {
-  transition: border 0.3s; 
-}
 #dndHumedad, #dndViento{
   display: none;
 }
@@ -348,3 +342,6 @@ canvas{
   height: 180px !important;
 }
 
+#map{
+  border: 1px solid black;
+}

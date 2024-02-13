@@ -8,22 +8,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-
-
-
-
-var nombresUbicaciones = []; // Variable para almacenar los nombres de ubicaciones
-
-// Zonas
-let cantabrianMountains = [];
-let coastZone = [];
-let donostialdea = [];
-let ebroValley = [];
-let greatBilbao = [];
-let interiorBasins = [];
-let pyrenees = [];
-let southernMountain = [];
-let vitoriaGasteiz = [];
+var nombresUbicaciones = []; 
 
 var clasesClonadas = [];
 
